@@ -29,9 +29,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="images\" />
     <Folder Include="out\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\AddNoiseToStraightLine.png" />
     <Content Include="out\Readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

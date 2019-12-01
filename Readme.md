@@ -15,3 +15,5 @@ Example:
 
 # AddNoiseToStraightline
 This example demonstrates how to generate a noisy straight line by adding Gaussian noise (np.random.normal) to the results of the equation y=mx+c
+
+![](./SimpleSnippets/images/AddNoiseToStraightLine.png)
