@@ -12,3 +12,6 @@ Example:
     Consider a function f(x)
     For values of x ranging from x=0 to x=100
     Plot the results of f(x) using Matplot lib
+
+# AddNoiseToStraightline
+This example demonstrates how to generate a noisy straight line by adding Gaussian noise (np.random.normal) to the results of the equation y=mx+c

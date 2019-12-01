@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1269bd0b-cb07-4fd6-ad31-484964fd7dd7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>PlotCustomFunction.py</StartupFile>
+    <StartupFile>AddNoiseToStraightLine.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,10 +21,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AddNoiseToStraightLine.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlotCustomFunction.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SimpleSnippets.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
