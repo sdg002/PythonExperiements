@@ -1,5 +1,5 @@
 
-
+<html>
         <h1>About this project</h1>
         <p>Simple snippets of Python for ever day use</p>
 
@@ -35,6 +35,10 @@
         <h2>salt_vs_pepper=0.8</h2>
         <img src="./SimpleSnippets/images/SaltPepper.8.png" width="50%" height="50%" />
         <hr />
+
+
+</html>
+
 
     
 
