@@ -10,7 +10,7 @@ This example demonstrates how to plot the results of a custom univariate functio
 ---
 # AddNoiseToStraightline
 This example demonstrates how to generate a noisy straight line by adding Gaussian noise (np.random.normal) to the results of the equation y=mx+c
-<img src="./SimpleSnippets/images/AddNoiseToStraightLine.png"/>
+<img src="./SimpleSnippets/images/AddNoiseToStraightLine.png"  width="50%" height="50%"/>
             
 ---
 
@@ -18,10 +18,10 @@ This example demonstrates how to generate a noisy straight line by adding Gaussi
 Demonstrates how to generate Salt and Pepper noise using scikit-image module
 
 ## salt_vs_pepper=0.2
-<img src="SimpleSnippets/images/SaltPepper.2.png"/>
+<img src="SimpleSnippets/images/SaltPepper.2.png"  width="50%" height="50%"/>
 
 ## salt_vs_pepper=0.5
-<img src="SimpleSnippets/images/SaltPepper.5.png"/>
+<img src="SimpleSnippets/images/SaltPepper.5.png"  width="50%" height="50%"/>
 
 ## salt_vs_pepper=0.8
 <img src="./SimpleSnippets/images/SaltPepper.8.png" width="50%" height="50%" />
