@@ -27,3 +27,21 @@ Demonstrates how to generate Salt and Pepper noise using scikit-image module
 <img src="./SimpleSnippets/images/SaltPepper.8.png" width="50%" height="50%" />
 
 ---
+Demonstrates how to generate Speckle noise using scikit-image module
+
+## variance=0.001
+<img src="SimpleSnippets/images/Speckle0.001.png"  width="50%" height="50%"/>
+
+## variance=0.002
+<img src="SimpleSnippets/images/Speckle0.002.png"  width="50%" height="50%"/>
+
+## variance=0.004
+<img src="SimpleSnippets/images/Speckle0.004.png"  width="50%" height="50%"/>
+
+## variance=0.006
+<img src="SimpleSnippets/images/Speckle0.006.png"  width="50%" height="50%"/>
+
+## variance=0.008
+<img src="SimpleSnippets/images/Speckle0.008.png"  width="50%" height="50%"/>
+
+---
