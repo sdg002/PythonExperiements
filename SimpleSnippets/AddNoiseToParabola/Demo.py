@@ -12,8 +12,8 @@ import math
 #
 #Generate X values
 #
-x_start=-3
-x_end=3
+x_start=-6
+x_end=6
 xvalues = np.linspace(x_start, x_end, 20)
 print(*xvalues,sep="\n")
 #
@@ -28,6 +28,9 @@ def MyCustomParabola(x):
 #
 vfunc=np.vectorize(MyCustomParabola)
 y_original=vfunc(xvalues)
+y_start=min(y_original)
+y_end=max(y_original)
+
 #
 #Create a Numpy array to hold the original X,Y
 #
@@ -40,7 +43,8 @@ for index in range(0,len(xvalues)):
 #Create normally distributed Gaussian data
 #https://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule
 #
-stddev=0.3 #this gives a decent amount of noise
+stddev=1.0
+# 0.3 #this gives a decent amount of noise
 mean=0
 noise = np.random.normal(mean, stddev, len(xvalues))   
 #
@@ -71,8 +75,17 @@ ax = plt.axes()
 #
 #Set the same scale on X and Y axis
 #
-plt.xlim(x_start-3, x_end+3)
-plt.ylim(x_start-3, x_end+3)
+lst_extreme_points=[]
+lst_extreme_points.append(x_start)
+lst_extreme_points.append(x_end)
+lst_extreme_points.append(y_start)
+lst_extreme_points.append(y_end)
+graph_min=min(lst_extreme_points)
+graph_max=max(lst_extreme_points)
+
+
+plt.xlim(graph_min-3, graph_max+3)
+plt.ylim(graph_min-3, graph_max+3)
 plt.gca().set_aspect('equal', adjustable='box')
 #
 #Show a grid
@@ -84,3 +97,9 @@ file_image=os.path.join(folder_script,"../out","Results.png")
 plt.savefig(file_image)
 plt.show()
 pass
+
+
+#You finished noisy parabola plotting
+#What next? 
+#    Add salt and pepper noise
+#    Generate something that can be consumed
