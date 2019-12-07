@@ -46,3 +46,12 @@ Demonstrates how to generate Speckle noise using scikit-image module
 <img src="SimpleSnippets/images/Speckle0.008.png"  width="50%" height="50%"/>
 
 ---
+
+# NumpyBlankImage
+- Demonstrates how to generate a blank image using a Numpy 
+- Setting one color for all the pixels
+- Saving the image to disk
+
+<img src="SimpleSnippets/images/Numpy.BlankImage.200.png"  width="50%" height="50%"/>
+
+---

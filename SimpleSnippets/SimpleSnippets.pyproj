@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1269bd0b-cb07-4fd6-ad31-484964fd7dd7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>AddNoiseToParabola\Demo.py</StartupFile>
+    <StartupFile>NumpyBlankImage\demo.mono.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,6 +25,9 @@
     <Compile Include="AddNoiseToStraightLine.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="NumpyBlankImage\demo.mono.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlotCustomFunction.py">
       <SubType>Code</SubType>
     </Compile>
@@ -38,18 +41,22 @@
   <ItemGroup>
     <Folder Include="images\" />
     <Folder Include="AddNoiseToParabola\" />
+    <Folder Include="NumpyBlankImage\" />
     <Folder Include="SpeckleNoise\" />
     <Folder Include="SaltAndPepperNoise\" />
     <Folder Include="out\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\AddNoiseToStraightLine.png" />
+    <Content Include="images\Numpy.BlankImage.200.png" />
     <Content Include="images\SaltPepper.2.png" />
     <Content Include="images\SaltPepper.5.png" />
     <Content Include="images\SaltPepper.8.png" />
-    <Content Include="images\Speckle0.001000.png" />
-    <Content Include="images\Speckle0.002000.png" />
-    <Content Include="images\Speckle0.004000.png" />
+    <Content Include="images\Speckle0.001.png" />
+    <Content Include="images\Speckle0.002.png" />
+    <Content Include="images\Speckle0.004.png" />
+    <Content Include="images\Speckle0.006.png" />
+    <Content Include="images\Speckle0.008.png" />
     <Content Include="out\Readme.txt" />
     <Content Include="README.html" />
     <Content Include="README.md" />
