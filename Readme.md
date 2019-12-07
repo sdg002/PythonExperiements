@@ -52,6 +52,12 @@ Demonstrates how to generate Speckle noise using scikit-image module
 - Setting one color for all the pixels
 - Saving the image to disk
 
+## Monochrome image - Numpy array has 1 channel
+
 <img src="SimpleSnippets/images/Numpy.BlankImage.200.png"  width="50%" height="50%"/>
+
+## Color image - Numpy array has 3 channels
+
+<img src="SimpleSnippets/images/Numpy.ColorImage.255.255.0.png"  width="50%" height="50%"/>
 
 ---
