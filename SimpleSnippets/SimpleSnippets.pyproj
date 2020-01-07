@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1269bd0b-cb07-4fd6-ad31-484964fd7dd7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>NumpyBlankImage\demo.color.py</StartupFile>
+    <StartupFile>AddNoiseToLine\AddNoiseToStraightLine1.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AddNoiseToParabola\Demo.py" />
-    <Compile Include="AddNoiseToStraightLine.py">
+    <Compile Include="AddNoiseToLine\AddNoiseToStraightLine1.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NumpyBlankImage\demo.color.py">
@@ -40,10 +40,14 @@
     <Compile Include="SpeckleNoise\demo.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="test_1.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="images\" />
     <Folder Include="AddNoiseToParabola\" />
+    <Folder Include="AddNoiseToLine\" />
     <Folder Include="NumpyBlankImage\" />
     <Folder Include="SpeckleNoise\" />
     <Folder Include="SaltAndPepperNoise\" />

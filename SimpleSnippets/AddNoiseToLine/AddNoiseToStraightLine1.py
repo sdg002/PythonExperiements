@@ -55,7 +55,7 @@ plt.gca().set_aspect('equal', adjustable='box')
 ax.grid(True, which='both')
 plt.scatter(xlist,ylist) 
 folder_script=os.path.dirname(__file__)
-file_image=os.path.join(folder_script,"out","Results.png")
+file_image=os.path.join(folder_script,"./../out","Results.png")
 plt.savefig(file_image)
 plt.show()
 pass
