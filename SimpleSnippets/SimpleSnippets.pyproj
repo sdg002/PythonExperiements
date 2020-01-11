@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1269bd0b-cb07-4fd6-ad31-484964fd7dd7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>AddNoiseToLine\AddNoiseToStraightLine1.py</StartupFile>
+    <StartupFile>AddNoiseToLine\AddNoiseToStraightLine2.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AddNoiseToLine\AddNoiseToStraightLine2.py" />
     <Compile Include="AddNoiseToParabola\Demo.py" />
     <Compile Include="AddNoiseToLine\AddNoiseToStraightLine1.py">
       <SubType>Code</SubType>
