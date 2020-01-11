@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 import math
+import GenerateGaussianNoiseAtPoint as gaussianxy
 #
 #Generate X values
 #
@@ -28,30 +29,6 @@ def MyCustomStraightLing(x):
 vfunc=np.vectorize(MyCustomStraightLing)
 y_original=vfunc(xvalues)
 y_original
-#
-#Generate a normally distributed random cluster of points around x,y
-#
-def GenerateClusterOfRandomPointsAroundXY(x,y):
-    angleStart=0
-    angleEnd=2*3.1415
-    angleStepDegrees=10
-    angleStepRadians=2*3.1415/360 * angleStepDegrees
-    total_angular_movements=12
-    angles=np.linspace(angleStart,angleEnd,total_angular_movements)
-    mean=0
-    stddev=1
-    random_radii=np.random.normal(mean, stddev, len(angles)) 
-    np_results=np.zeros((len(angles),2))
-    for idx in range(0,len(angles)):
-        theta=angles[idx]
-        radii=abs(random_radii[idx])
-        random_x=radii* math.cos(theta)  +x
-        random_y=radii* math.sin(theta)  +y
-        print("angle=%f,x,y=%f,%f" % (theta,random_x,random_y))
-        np_results[idx][0]=random_x
-        np_results[idx][1]=random_y
-
-    return np_results
 
 #
 #Loop through all points and generate clusters around each x,y
@@ -62,7 +39,8 @@ for index in range(0,len(xvalues)):
     x=xvalues[index]
     y=y_original[index]
     print("x,y  %f,%f" % (x,y))
-    arr_cluster=GenerateClusterOfRandomPointsAroundXY(x,y)
+    stddev=1
+    arr_cluster=gaussianxy.GenerateClusterOfRandomPointsAroundXY(x,y,stddev,20)
     print(arr_cluster)
     cluster_shape=arr_cluster.shape
     list_x.append(x)
