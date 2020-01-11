@@ -58,6 +58,7 @@
     <Content Include="images\AddNoiseToStraightLine.png" />
     <Content Include="images\Numpy.BlankImage.200.png" />
     <Content Include="images\Numpy.ColorImage.255.255.0.png" />
+    <Content Include="images\AddNoiseToStraightLine2.png" />
     <Content Include="images\SaltPepper.2.png" />
     <Content Include="images\SaltPepper.5.png" />
     <Content Include="images\SaltPepper.8.png" />

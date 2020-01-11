@@ -9,9 +9,16 @@ This example demonstrates how to plot the results of a custom univariate functio
 - Plot the results of f(x) using Matplot lib
 ---
 # AddNoiseToStraightline
+## Approach 1
 This example demonstrates how to generate a noisy straight line by adding Gaussian noise (np.random.normal) to the results of the equation y=mx+c
 <img src="./SimpleSnippets/images/AddNoiseToStraightLine.png"  width="50%" height="50%"/>
             
+## Approach 2
+This example we generate a point which lies on the line and then generated normally distributed random points around this point.
+### How is this approach different from Approach 1? At every true point, we are radially generating a cluster of normally distributed random points
+<img src="./SimpleSnippets/images/AddNoiseToStraightLine2.png"  width="50%" height="50%"/>
+
+
 ---
 
 # SaltAndPepperNoise
