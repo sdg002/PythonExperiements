@@ -8,6 +8,12 @@ This example demonstrates how to plot the results of a custom univariate functio
 - For values of x ranging from x=0 to x=100
 - Plot the results of f(x) using Matplot lib
 ---
+
+# AddNoiseToParabola
+This example shows how to generate Gaussian noise for a parabola
+
+<img src="./SimpleSnippets/images/AddNoiseToParabola2.png"  width="50%" height="50%"/>
+
 # AddNoiseToStraightline
 ## Approach 1
 This example demonstrates how to generate a noisy straight line by adding Gaussian noise (np.random.normal) to the results of the equation y=mx+c
