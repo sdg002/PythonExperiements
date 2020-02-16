@@ -34,11 +34,24 @@ print(df.columns)
 print(df.head())
 PrintHorLine()
 #
-#Adding rows to empty data frame
+#Adding rows to empty data frame using loc
 #
-print("Append row to empty data frame")
+print("Append row to empty data frame - using loc method")
 df.loc[len(df)]=[11,"toy",1]
 df.loc[len(df)]=[13,"food",3.5]
+print(df)
+PrintHorLine()
+#
+#Add rows to using a new DataFrame
+#
+print("Append row using append() method")
+new_record={
+        "Price": [11] , 
+        "Cat": ["food"], 
+        "Qty":[110]
+        }
+df_temp=pd.DataFrame(new_record)
+df=df.append(df_temp,ignore_index=True)
 print(df)
 PrintHorLine()
 
