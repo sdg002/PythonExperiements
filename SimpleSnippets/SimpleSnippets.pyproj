@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1269bd0b-cb07-4fd6-ad31-484964fd7dd7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Pandas\Creation.py</StartupFile>
+    <StartupFile>Pandas\Binning.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -40,6 +40,9 @@
     <Compile Include="NumpyBlankImage\demo.mono.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Pandas\Binning.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Pandas\Common.py">
       <SubType>Code</SubType>
     </Compile>
@@ -69,6 +72,7 @@
     <Folder Include="images\" />
     <Folder Include="AddNoiseToParabola\" />
     <Folder Include="AddNoiseToLine\" />
+    <Folder Include="AddNoiseToCircle\" />
     <Folder Include="Pandas\" />
     <Folder Include="NumpyBlankImage\" />
     <Folder Include="SpeckleNoise\" />
@@ -89,8 +93,6 @@
     <Content Include="images\Speckle0.006.png" />
     <Content Include="images\Speckle0.008.png" />
     <Content Include="out\Readme.txt" />
-    <Content Include="README.html" />
-    <Content Include="README.md" />
     <Content Include="SaltAndPepperNoise\White.png" />
     <Content Include="SpeckleNoise\White.png" />
   </ItemGroup>
