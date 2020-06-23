@@ -64,9 +64,6 @@
     <Compile Include="SpeckleNoise\demo.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="test_1.py">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="images\" />
