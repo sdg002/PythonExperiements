@@ -24,6 +24,11 @@ This example we generate a point which lies on the line and then generated norma
 ### How is this approach different from Approach 1? At every true point, we are radially generating a cluster of normally distributed random points
 <img src="./SimpleSnippets/images/AddNoiseToStraightLine2.png"  width="50%" height="50%"/>
 
+# AddNoiseToCircle
+
+<img src="./SimpleSnippets/images/Noisy_Circle.png"  width="50%" height="50%"/>
+
+
 
 ---
 

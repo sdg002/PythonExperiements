@@ -4,9 +4,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1269bd0b-cb07-4fd6-ad31-484964fd7dd7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Pandas\Binning.py</StartupFile>
-    <SearchPath>
-    </SearchPath>
+    <StartupFile>AddNoiseToCircle\AddNoiseToCircle.py</StartupFile>
+    <SearchPath>..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>SimpleSnippets</Name>
@@ -14,6 +13,8 @@
     <TestFramework>unittest</TestFramework>
     <UnitTestPattern>test*.py</UnitTestPattern>
     <UnitTestRootDirectory>.</UnitTestRootDirectory>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,6 +25,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AddNoiseToCircle\AddNoiseToCircle.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="AddNoiseToLine\AddNoiseToStraightLine2.py" />
     <Compile Include="AddNoiseToLine\GenerateGaussianNoiseAtPoint.py">
       <SubType>Code</SubType>
@@ -77,7 +81,9 @@
     <Folder Include="out\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\AddNoiseToParabola2.png" />
     <Content Include="images\AddNoiseToStraightLine.png" />
+    <Content Include="images\Noisy_Circle.png" />
     <Content Include="images\Numpy.BlankImage.200.png" />
     <Content Include="images\Numpy.ColorImage.255.255.0.png" />
     <Content Include="images\AddNoiseToStraightLine2.png" />
