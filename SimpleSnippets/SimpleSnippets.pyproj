@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1269bd0b-cb07-4fd6-ad31-484964fd7dd7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>AddNoiseToCircle\AddNoiseToCircle.py</StartupFile>
+    <StartupFile>AddNoiseToLine\AddNoiseToStraightLine2.py</StartupFile>
     <SearchPath>..\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -29,9 +29,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AddNoiseToLine\AddNoiseToStraightLine2.py" />
-    <Compile Include="AddNoiseToLine\GenerateGaussianNoiseAtPoint.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="AddNoiseToParabola\Demo2.py" />
     <Compile Include="AddNoiseToParabola\Demo.py" />
     <Compile Include="AddNoiseToLine\AddNoiseToStraightLine1.py">

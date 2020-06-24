@@ -21,7 +21,10 @@ This example demonstrates how to generate a noisy straight line by adding Gaussi
             
 ## Approach 2
 This example we generate a point which lies on the line and then generated normally distributed random points around this point.
-### How is this approach different from Approach 1? At every true point, we are radially generating a cluster of normally distributed random points
+
+_How is this approach different from Approach 1?_
+
+At every true point, we are radially generating a cluster of normally distributed random points
 <img src="./SimpleSnippets/images/AddNoiseToStraightLine2.png"  width="50%" height="50%"/>
 
 # AddNoiseToCircle

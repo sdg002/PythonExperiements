@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 import math
-import GenerateGaussianNoiseAtPoint as gaussianxy
+from  Common import Util
 #
 #Generate X values
 #
@@ -40,7 +40,7 @@ for index in range(0,len(xvalues)):
     y=y_original[index]
     print("x,y  %f,%f" % (x,y))
     stddev=1
-    arr_cluster=gaussianxy.GenerateClusterOfRandomPointsAroundXY(x,y,stddev,20)
+    arr_cluster=Util.GenerateClusterOfRandomPointsAroundXY(x,y,stddev,20)
     print(arr_cluster)
     cluster_shape=arr_cluster.shape
     list_x.append(x)
@@ -68,7 +68,7 @@ plt.gca().set_aspect('equal', adjustable='box')
 #Show a grid
 #
 ax.grid(True, which='both')
-plt.scatter(list_x,list_y) 
+plt.scatter(list_x,list_y,s=1) 
 folder_script=os.path.dirname(__file__)
 file_image=os.path.join(folder_script,"./../out","Results.png")
 plt.savefig(file_image)

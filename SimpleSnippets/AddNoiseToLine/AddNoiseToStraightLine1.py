@@ -6,6 +6,7 @@ We will use np.random.normal to generate Gaussian noise
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+
 #
 #Generate X values
 #
