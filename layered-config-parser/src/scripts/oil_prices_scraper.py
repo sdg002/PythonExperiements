@@ -10,4 +10,6 @@ if __name__ =="__main__":
     config_parser = ConfigWrapper.create_instance()
     url=config_parser.get("oil","endpoint")
     logging.info(f"Url={url}")
+    logging.info("API key={}".format(config_parser.get("oil","api_key")))
+    
 
