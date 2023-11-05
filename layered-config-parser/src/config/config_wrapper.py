@@ -8,7 +8,7 @@ class ConfigWrapper:
         config_parser = configparser.ConfigParser(os.environ,interpolation=configparser.ExtendedInterpolation())
         dir_name = os.path.dirname( __file__)
 
-        base_ini_file = os.path.join(dir_name,"base_settings.ini")
+        base_ini_file = os.path.join(dir_name,"settings.ini")
         if not os.path.exists(base_ini_file):
             raise Exception(f"The base INI file '{base_ini_file}' was not found in this directory")
         logging.info(f"The base INI file '{base_ini_file}' was found in this directory")
