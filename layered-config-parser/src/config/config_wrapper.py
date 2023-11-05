@@ -19,7 +19,7 @@ class ConfigWrapper:
             raise ValueError(f"The envrionment variable: 'environment' has not been set") 
         logging.info(f"The current environment is '{env}'")
 
-        environment_specific_ini_file = os.path.join(dir_name,"base_settings.ini")
+        environment_specific_ini_file = os.path.join(dir_name,f"settings.{env}.ini")
         if not os.path.exists(environment_specific_ini_file):
             raise Exception(f"The environment specific INI file '{environment_specific_ini_file}' was not found in this directory")
         logging.info(f"The environment specific INI file '{environment_specific_ini_file}' was found in this directory")
