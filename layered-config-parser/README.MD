@@ -1,13 +1,17 @@
 [[_TOC_]]
 
 # Overview
-Demonstrates the usage of Python's out of box `ConfigParser` class to implement a layered system of configuration using mulitple config files and seamlessly redirecting the config entries to be read from an environment variable. We will demonstrate how such a system can make your Python code to dynamically adapt to any environment.
+This short article demonstrates the usage of Python's out of box `ConfigParser` class to implement a layered system of configuration using mulitple config files and seamlessly redirecting the config entries to be read from an environment variable. We will demonstrate how such a system can make your Python code to dynamically adapt to any environment.
 
 ![overview](docs/images/overview_layered_with_plus.png)
 
+# Inspiration for this article?
+After having worked with `.NET Framework` and now with `.NET Core`, I was inspired to explore a solution offered by [.NET Core's layered Configuration](https://learn.microsoft.com/en-us/dotnet/core/extensions/configuration) approach. This system revolves around the `IConfiguration` abstraction.
+
+![dotnet-core-layered-config](docs/images/dotnet-core-layered-config.svg)
 ---
 
-# What is the problem we are trying to solve (to be done) ?
+# What is the problem we are trying to solve ?
 
 Lets imagine a classic scenario of Python code used for scraping information from various data sources. You have a **DEV** environment where you test your code (could be the feature branch) and a **PROD** environment which is more stable and producing data fit for consumption.
 
@@ -46,11 +50,6 @@ api_key = config_parse["oil"]["api_key"]
 
 ---
 
-# Solution using the out of box ConfigParser (to be done)
-
-[show a simple snippet]
-
----
 
 # Implementation details
 
@@ -59,7 +58,8 @@ api_key = config_parse["oil"]["api_key"]
 ---
 
 # Accompanying code
-to be done ??
+
+https://github.com/sdg002/PythonExperiements/tree/master/layered-config-parser
 
 ---
 
