@@ -19,11 +19,11 @@ After having worked with `.NET Framework` and now with `.NET Core`, I was inspir
 
 # What is the problem we are trying to solve ?
 
-Lets imagine a classic scenario of Python code used for scraping information from various data sources. You have a **DEV** environment where you test your code (could be the feature branch) and a **PROD** environment which is more stable and producing data fit for consumption.
+Lets imagine a classic scenario of Python code used for scraping information from various data sources. You have a **DEV** environment where you test your code (_more than often this would be the environment where your feature branch gets deployed via CI/CD_) and a **PROD** environment which is more stable and producing data fit for consumption (_you would probably deploy your master-main branch here_).
 
- You want to write your code in a manner which makes it possible for it be deployed to DEV/UAT/PROD environments and on Docker/VM hosts.
+ You want to write your code in a manner which makes it possible for it be deployed to `DEV/UAT/PROD` environments and on `Docker/VM` hosts.
 
-Here are some anti-patterns that we want to avoid:
+Here are some of the common anti-patterns that we want to avoid:
 
 #### Hard coded secrets
 ```python
