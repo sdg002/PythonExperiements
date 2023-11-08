@@ -116,7 +116,31 @@ if __name__ =="__main__":
 
 # Accompanying code
 
+#### Link to repo
+
 https://github.com/sdg002/PythonExperiements/tree/master/layered-config-parser
+
+
+### Running the code
+Instructions for Windows below. 
+
+1. Clone the repo
+1. Launch a CMD
+1. Navigate to the sub-folder `layered-config-parser`
+1. Set the environment variable `PYTHONPATH` to the absolute path to the sub-folder `layered-config-parser`
+1. Set the environment variable `ENVIRONMENT` to `prod`
+1. Run `python src\scripts\weather_scraper.py`
+
+![environment-variable-oil-api-key](docs/images/environment-variable-oil-api-key.png)
+
+Python is complaining about the missing environment variable `WEATHER_API_KEY`. We are referencing  `WEATHER_API_KEY` via the line `api_key=${WEATHER_API_KEY}` in the file `settings.ini` . 
+
+Set the environment variable `WEATHER_API_KEY` to some value and run again
+
+![oil-scraper-working-nicely
+](docs/images/oil-scraper-working-nicely.png)
+
+Voila!
 
 ---
 
