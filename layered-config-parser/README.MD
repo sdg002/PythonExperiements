@@ -21,7 +21,9 @@ After having worked with `.NET Framework` and now with `.NET Core`, I was inspir
 
 Lets imagine a classic scenario of Python code used for scraping information from various data sources. You have a **DEV** environment where you test your code (could be the feature branch) and a **PROD** environment which is more stable and producing data fit for consumption.
 
- You want to write your code in a manner which makes it possible for it be deployed to DEV/UAT/PROD environments and on Docker/VM hosts
+ You want to write your code in a manner which makes it possible for it be deployed to DEV/UAT/PROD environments and on Docker/VM hosts.
+
+Here are some anti-patterns that we want to avoid:
 
 #### Hard coded secrets
 ```python
@@ -87,12 +89,10 @@ api_key = config_parse["oil"]["api_key"]
 ---
 
 
-# Implementation details (to be done)
+# Putting it all together
 
-??? Remove this existing picture. Show a tree like picture of your source code folder
-??? show the usage of the ConfigWrapper
+![putting-it-together](docs/images/putting-it-together.png)
 
-![overview](docs/images/overview_layered_with_plus.png)
 
 ---
 
