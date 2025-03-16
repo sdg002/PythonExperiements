@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<records>
+    <record id="10">
+        <![CDATA[
+        line 1
+        line 2]]>
+    </record>
+    <record id="20">
+        <![CDATA[
+        line 100
+        line 200]]>
+    </record>
+
+</records>

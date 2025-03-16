@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <start>
+        <element name="addressBook">
+            <zeroOrMore>
+                <element name="card">
+                    <ref name="cardContent"/>
+                </element>
+            </zeroOrMore>
+        </element>
+    </start>
+    <define name="cardContent">
+        <element name="name">
+            <attribute name="weight">
+                <data type="decimal">
+
+                </data>
+            </attribute>
+            <text/>
+        </element>
+        <element name="email">
+            <text/>
+        </element>
+        <element name="age">
+            <text>
+                
+            </text>
+        </element>
+    </define>
+</grammar>
