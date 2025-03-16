@@ -17,3 +17,5 @@ pytest
 click
 keras
 tensorflow==2.17.0
+seaborn
+skillsnetwork
