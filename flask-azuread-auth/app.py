@@ -106,6 +106,8 @@ def authorized():
         }
         session["user"] = new_user
         login_user(User(new_user["id"], new_user["name"], new_user["email"]))
+        # Note - we are forced to finally redirect to the index page.
+        # This is because the at this point we have lost the information about the original page the user was trying to access.
         return redirect(url_for("index"))
     else:
         return f"Login failed: {result.get('error_description')}", 400
