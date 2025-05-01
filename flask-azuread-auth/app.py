@@ -1,9 +1,11 @@
+import logging
 import os
 from flask import Flask, redirect, url_for, session
 from flask import request
 from msal import ConfidentialClientApplication
 from flask_login import login_required, LoginManager, UserMixin, login_user
 import dotenv
+from datetime import datetime
 
 dotenv.load_dotenv(override=True)
 app = Flask(__name__)
@@ -28,6 +30,7 @@ class User(UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id):
+    logging.info(f"load_user ID: {user_id}")
     user = session.get("user")
     if user and user["id"] == user_id:
         return User(user["id"], user["name"], user["email"])
@@ -60,6 +63,11 @@ def index():
 @login_required
 def secure_view():
     return f"Hello, this is a secure view {session['user']['name']}!"
+
+
+@app.route("/unsecureview")
+def un_secure_view():
+    return f"Hello, this is a un-secure view {datetime.now()}"
 
 
 @app.route("/login")
