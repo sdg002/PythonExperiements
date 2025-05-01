@@ -7,6 +7,7 @@ Demonstrates Azure AD integration with Python Flask
 # Next steps
 1. Use a mix of authenticated and non-authenticated pages
 1. Control the session time out / cookie expiration time out
+1. Login/logout link - display logged in user name
 
 ----
 
