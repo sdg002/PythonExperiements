@@ -1,12 +1,38 @@
-from flask import Flask, redirect, url_for, session
-from flask import render_template, request
-from msal import ConfidentialClientApplication
 import os
+from flask import Flask, redirect, url_for, session
+from flask import request
+from msal import ConfidentialClientApplication
+from flask_login import login_required, LoginManager, UserMixin, login_user
 import dotenv
 
 dotenv.load_dotenv(override=True)
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Replace with a secure key in production
+
+# Initialize Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"  # Redirect to login page if not authenticated
+
+
+class User(UserMixin):
+    def __init__(self, id, name, email):
+        self.id = id
+        self.name = name
+        self.email = email
+
+#
+# Exception: Missing user_loader or request_loader. Refer to http://flask-login.readthedocs.io/#how-it-works for more info.
+#
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    user = session.get("user")
+    if user and user["id"] == user_id:
+        return User(user["id"], user["name"], user["email"])
+    return None
+
 
 # Azure AD Configuration
 CLIENT_ID = os.environ["CLIENT_ID"]
@@ -30,6 +56,12 @@ def index():
     return f"Hello, {session['user']['name']}!"
 
 
+@app.route("/secureview")
+@login_required
+def secure_view():
+    return f"Hello, this is a secure view {session['user']['name']}!"
+
+
 @app.route("/login")
 def login():
     auth_url = msal_app.get_authorization_request_url(
@@ -49,10 +81,13 @@ def authorized():
     )
 
     if "id_token_claims" in result:
-        session["user"] = {
+        new_user = {
+            "id": result["id_token_claims"]["preferred_username"].lower(),
             "name": result["id_token_claims"]["name"],
             "email": result["id_token_claims"]["preferred_username"],
         }
+        session["user"] = new_user
+        login_user(User(new_user["id"], new_user["name"], new_user["email"]))
         return redirect(url_for("index"))
     else:
         return f"Login failed: {result.get('error_description')}", 400
