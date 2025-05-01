@@ -8,6 +8,7 @@ import dotenv
 from datetime import datetime
 
 dotenv.load_dotenv(override=True)
+logging.basicConfig(level=logging.INFO)
 app = Flask(__name__)
 app.secret_key = os.urandom(24)  # Replace with a secure key in production
 
@@ -62,11 +63,17 @@ def index():
 @app.route("/secureview")
 @login_required
 def secure_view():
+    """
+    This method is decorated with @login_required and forces the user to be authenticated before accessing this view.
+    """
     return f"Hello, this is a secure view {session['user']['name']}!"
 
 
 @app.route("/unsecureview")
 def un_secure_view():
+    """
+    This is an un-secure view. It does not require authentication.
+    """
     return f"Hello, this is a un-secure view {datetime.now()}"
 
 
@@ -80,6 +87,9 @@ def login():
 
 @app.route(REDIRECT_PATH)
 def authorized():
+    logging.info(
+        f"Redirected to {REDIRECT_PATH} count of args={len(request.args)}")
+
     code = request.args.get("code")
     if not code:
         return "Authorization failed.", 400
