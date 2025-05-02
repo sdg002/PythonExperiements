@@ -4,12 +4,31 @@
 Demonstrates Azure AD integration with Python Flask
 
 ---
-# Next steps
-1. Use a mix of authenticated and non-authenticated pages
-1. Control the session time out / cookie expiration time out
-1. Login/logout link - display logged in user name
+
+# Summary steps from copilot
+[Steps from Copilot](docs/copilot.md)
 
 ----
+
+# How does login_manger work ?
+
+## Step-0-Configure login_manager
+You need to specify the route which will do the login operation
+
+## Step-1-Handle getAToken end point
+
+This method receives the JWT token. Decode the `email` and `name` attributes from the token and invoke the method `login_user` 
+
+## Step-1-user_loader method to intercept all calls
+
+This will create an `User` object by reading `email` and `name` from `session`
+
+## Step-3-Protect the views using `@login_required`
+
+- This will kick off the login sequence whenever somebody tries to hit the protected route. 
+- The login route specified while configuring `login_manager` will be invoked
+
+---
 
 # App registration
 
