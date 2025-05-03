@@ -4,7 +4,7 @@ from datetime import datetime
 import dash
 from dash import html
 
-dash.register_page(__name__, title=f'Home ({os.environ.get("ENVIRONMENT")})')
+dash.register_page(__name__, title=f'Page2 ({os.environ.get("ENVIRONMENT")})')
 
 
 def layout():
