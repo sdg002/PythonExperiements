@@ -5,6 +5,7 @@
         "--disable=C0116",
         "--disable=C0114",
         "--disable=W1203",
-        "--disable=C0415"
+        "--disable=C0415",
+        "--disable=C0301"
     ]
 }

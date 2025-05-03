@@ -6,6 +6,8 @@ from flask import request
 from msal import ConfidentialClientApplication
 from flask_login import login_required, LoginManager, UserMixin, login_user
 import dotenv
+import dash
+
 
 dotenv.load_dotenv(override=True)
 logging.basicConfig(level=logging.INFO)
@@ -16,6 +18,9 @@ app.secret_key = os.urandom(24)  # Replace with a secure key in production
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"  # Redirect to login page if not authenticated
+
+# Configure Dash app
+# context
 
 
 class User(UserMixin):
@@ -120,6 +125,12 @@ def logout():
         f"{AUTHORITY}/oauth2/v2.0/logout?post_logout_redirect_uri={url_for('index', _external=True)}"
     )
 
+
+with app.app_context():
+    logging.info("Inside app_context")
+    dash_app = dash.Dash(use_pages=True, server=app,
+                         prevent_initial_callbacks=True,
+                         url_base_pathname="/dash/")
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
