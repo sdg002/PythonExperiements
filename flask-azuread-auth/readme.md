@@ -125,3 +125,13 @@ sess = Session()
 sess.init_app(app)
 ```
 
+---
+
+# References
+
+## Microsoft guidance for Flask-Azure AD integration
+https://learn.microsoft.com/en-us/azure/active-directory-b2c/configure-authentication-sample-python-web-app?tabs=windows
+
+
+## Plotly community question
+https://community.plotly.com/t/integrating-authentication-for-dash-in-a-multi-page-scenario/92149
