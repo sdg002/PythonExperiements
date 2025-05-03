@@ -1,11 +1,11 @@
 import logging
 import os
+from datetime import datetime
 from flask import Flask, redirect, url_for, session
 from flask import request
 from msal import ConfidentialClientApplication
 from flask_login import login_required, LoginManager, UserMixin, login_user
 import dotenv
-from datetime import datetime
 
 dotenv.load_dotenv(override=True)
 logging.basicConfig(level=logging.INFO)
