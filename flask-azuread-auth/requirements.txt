@@ -1,3 +1,4 @@
 flask
 python-dotenv
 msal<2.0
+flask-login
