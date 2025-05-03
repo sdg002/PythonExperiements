@@ -10,9 +10,10 @@ dash.register_page(__name__, title=f'Page2 ({os.environ.get("ENVIRONMENT")})')
 def layout():
     logging.info('Page handler:{__name__}')
     user_name = flask.session["user"]["name"]
+    email = flask.session["user"]["email"]
     html_elements = html.Div([
         html.H1('This is Page2'),
         html.Div(
-            f'This is our Page2 content. {datetime.now()} , {user_name=}'),
+            f'This is our Page2 content. {datetime.now()} , {user_name=}, {email=}'),
     ])
     return html_elements
