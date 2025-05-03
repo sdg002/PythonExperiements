@@ -5,14 +5,64 @@ Demonstrates Azure AD integration with Python Flask
 
 ---
 
-# Summary steps from copilot for integrating AD authentication with Flask
-[Steps from Copilot](docs/copilot.md)
-
-----
-
 # Next steps
 1. Secure Plotly-Dash multi pages
 1. Persist session in file
+1. Configure AD app registration for claims
+
+----
+
+# Approach for authenticating Dash pages
+
+## Intro
+We have a simple Dash multi-page ???(link comes here) application.
+
+## Challenge
+For regular Flask view, We would have used `login_required` decorated to protect the route.
+
+```python
+@app.route("/secureview")
+@login_required
+def secure_view():
+    pass
+```
+But, the above is not applicable for Dash pages
+
+## Possible approach
+
+## Step-1-Intercept all requests in a before_request handler
+
+```python
+def before_app_request():
+    current_path = request.path
+    current_url = request.url
+    logging.info(f"Before request: Path = {current_path}, URL = {current_url}")
+
+```
+
+## Step-2-Check if this is a Dash page
+
+if one of the Dash pages, then re-route to login
+```python
+@app.before_request
+def before_app_request():
+    current_path = request.path
+    current_url = request.url
+    logging.info(f"Before request: Path = {current_path}, URL = {current_url}")
+    if not current_path.startswith("/dash/"):
+        return
+    if not session.get("user"):
+        logging.info("User not authenticated, redirecting to login")
+        return redirect(url_for("login"))
+    else:
+        logging.info(f"User authenticated: {session['user']['name']}")
+
+```
+
+----
+
+# Summary steps from copilot for integrating AD authentication with Flask
+[Steps from Copilot](docs/copilot.md)
 
 ----
 
