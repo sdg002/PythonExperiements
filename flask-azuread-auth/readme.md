@@ -5,8 +5,14 @@ Demonstrates Azure AD integration with Python Flask
 
 ---
 
-# Summary steps from copilot
+# Summary steps from copilot for integrating AD authentication with Flask
 [Steps from Copilot](docs/copilot.md)
+
+----
+
+# Next steps
+1. Secure Plotly-Dash multi pages
+1. Persist session in file
 
 ----
 
