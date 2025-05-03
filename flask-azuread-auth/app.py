@@ -132,5 +132,20 @@ with app.app_context():
                          prevent_initial_callbacks=True,
                          url_base_pathname="/dash/")
 
+
+@app.before_request
+def before_app_request():
+    current_path = request.path
+    current_url = request.url
+    logging.info(f"Before request: Path = {current_path}, URL = {current_url}")
+    if not current_path.startswith("/dash/"):
+        return
+    if not session.get("user"):
+        logging.info("User not authenticated, redirecting to login")
+        return redirect(url_for("login"))
+    else:
+        logging.info(f"User authenticated: {session['user']['name']}")
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
