@@ -30,7 +30,7 @@ This will create an `User` object by reading `email` and `name` from `session`
 
 ---
 
-# App registration
+# App registration on Azure AD
 
 ## Redirect URL
 ![alt text](docs/images/azure_app_registration.png)
