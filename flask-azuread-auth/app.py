@@ -57,7 +57,7 @@ msal_app = ConfidentialClientApplication(
 def index():
     if not session.get("user"):
         return redirect(url_for("login"))
-    return f"Hello, {session['user']['name']}!"
+    return f"Hello, {session['user']['name']}! , current time is {datetime.now()}"
 
 
 @app.route("/secureview")

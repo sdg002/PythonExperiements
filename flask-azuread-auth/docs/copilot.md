@@ -1,20 +1,20 @@
-Sure! Here are the steps to configure Azure AD authentication for a Python Flask web app:
+[[_TOC_]]
 
-### Step 1: **Set Up Your Azure AD Tenant**
+# Step 1: **Set Up Your Azure AD Tenant**
 1. **Create an Azure AD tenant** if you don't have one already.
 2. **Register your Flask application** in the Azure AD portal:
    - Go to **Azure Active Directory** > **App registrations** > **New registration**.
    - Enter a name for your app.
    - Set the **Redirect URI** to your Flask app's URL (e.g., `http://localhost:5000/login/callback`).
 
-### Step 2: **Install Required Packages**
+# Step 2: **Install Required Packages**
 Install the necessary Python packages:
 
 ```bash
 pip install Flask msal requests
 ```
 
-### Step 3: **Configure Flask Application**
+# Step 3: **Configure Flask Application**
 Set up your Flask app with the necessary configurations:
 
 ```python
@@ -70,14 +70,14 @@ if __name__ == '__main__':
     app.run()
 ```
 
-### Step 4: **Run Your Flask Application**
+# Step 4: **Run Your Flask Application**
 Start your Flask application:
 
 ```bash
 python app.py
 ```
 
-### Step 5: **Test Authentication**
+# Step 5: **Test Authentication**
 Navigate to your Flask app in the browser and test the login flow.
 
 Would you like more details on any specific step or have any other questions about Flask or Azure AD?
