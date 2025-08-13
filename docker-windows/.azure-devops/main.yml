@@ -54,6 +54,10 @@ stages:
                 python-demo:$(Build.BuildId)
                 python-demo:latest
 
+          - script: |
+              docker images
+            displayName: "Display all Docker images"
+
           - task: Docker@2
             displayName: "Run Docker container"
             inputs:
