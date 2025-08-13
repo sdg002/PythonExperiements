@@ -54,9 +54,17 @@ stages:
                 python-demo:$(Build.BuildId)
                 python-demo:latest
 
+          - task: Docker@2
+            displayName: "List all Docker images"
+            inputs:
+              command: "images"
+
           - script: |
-              docker images
-            displayName: "Display all Docker images"
+              echo "Verifying specific image exists:"
+              docker image ls python-demo
+              echo "Docker version:"
+              docker --version
+            displayName: "Verify built image and Docker info"
 
           - task: Docker@2
             displayName: "Run Docker container"
