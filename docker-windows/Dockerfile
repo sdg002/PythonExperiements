@@ -1,5 +1,5 @@
 # Use Windows Server Core with Python
-FROM python:3.11-windowsservercore
+FROM python:3.13-windowsservercore
 
 # Set the working directory in the container
 WORKDIR /app
