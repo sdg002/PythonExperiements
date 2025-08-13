@@ -1,0 +1,20 @@
+# Use Windows Server Core with Python
+FROM python:3.11-windowsservercore
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy requirements file
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the source code
+COPY src/ ./src/
+
+# Set the working directory to src for execution
+WORKDIR /app/src
+
+# Command to run the application
+CMD ["python", "demo.py"]

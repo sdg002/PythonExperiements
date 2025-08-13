@@ -1,0 +1,78 @@
+# Azure DevOps Pipeline for Windows
+# Starter pipeline for Python project on Windows
+
+trigger:
+  - main
+  - feature/*
+
+pool:
+  vmImage: "windows-latest"
+
+variables:
+  pythonVersion: "3.11"
+  workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows"
+
+stages:
+  - stage: Build
+    displayName: "Build Stage"
+    jobs:
+      - job: BuildJob
+        displayName: "Build and Test"
+        steps:
+          - task: UsePythonVersion@0
+            displayName: "Set up Python $(pythonVersion)"
+            inputs:
+              versionSpec: "$(pythonVersion)"
+              addToPath: true
+
+          - script: |
+              python -m pip install --upgrade pip
+              pip install -r requirements.txt
+            displayName: "Install Python dependencies"
+            workingDirectory: "$(workingDirectory)"
+
+          - script: |
+              python src/demo.py
+            displayName: "Run Python application"
+            workingDirectory: "$(workingDirectory)"
+
+  - stage: Docker
+    displayName: "Docker Stage"
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - job: DockerBuild
+        displayName: "Build Docker Image"
+        steps:
+          - task: Docker@2
+            displayName: "Build Docker image"
+            inputs:
+              command: "build"
+              dockerfile: "$(workingDirectory)/Dockerfile"
+              buildContext: "$(workingDirectory)"
+              tags: |
+                python-demo:$(Build.BuildId)
+                python-demo:latest
+
+          - task: Docker@2
+            displayName: "Run Docker container"
+            inputs:
+              command: "run"
+              arguments: "--rm python-demo:latest"
+
+  - stage: Deploy
+    displayName: "Deploy Stage"
+    dependsOn: Docker
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - deployment: DeployJob
+        displayName: "Deploy Application"
+        environment: "production"
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: |
+                    echo "Deployment steps would go here"
+                    echo "This runs only on main branch"
+                  displayName: "Deploy application"
