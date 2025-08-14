@@ -20,6 +20,9 @@ variables:
   pythonVersion: "3.11"
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows"
   imagetag: "$(Build.BuildId)"
+  containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
+  repositoryName: "python-demo"
+  dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
 
 stages:
   - stage: Build
@@ -63,28 +66,29 @@ stages:
         displayName: "Build Docker Image"
         steps:
           - task: Docker@2
-            displayName: "Build Docker image"
+            displayName: "Build and push Docker image"
             inputs:
-              command: "build"
+              command: "buildAndPush"
               dockerfile: "$(workingDirectory)/Dockerfile"
               buildContext: "$(workingDirectory)"
-              repository: "python-demo"
+              repository: "$(containerRegistry)/$(repositoryName)"
               tags: $(imagetag)
+              containerRegistry: "$(dockerRegistryServiceConnection)"
 
           - task: Docker@2
             displayName: "List all Docker images"
             inputs:
               command: "images"
-
+                            
           - script: |
               echo "Verifying specific image exists:"
-              docker image ls python-demo
+              docker image ls $(containerRegistry)/$(repositoryName)
               echo "Docker version:"
               docker --version
             displayName: "Verify built image and Docker info"
 
           - script: |
-              docker run --rm python-demo:$(imagetag)
+              docker run --rm $(containerRegistry)/$(repositoryName):$(imagetag)
             displayName: "Run Docker container"
 
   - stage: Deploy

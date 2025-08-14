@@ -39,12 +39,10 @@ https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-contai
 https://hub.docker.com/r/microsoft/windows-nanoserver
 
 # Next action item
-- Did the docker build succeed? If not try different Python (https://hub.docker.com/_/python)
-- Read this SFO https://stackoverflow.com/questions/73666815/azure-devops-pipelines-cannot-find-docker-image-when-pushing-to-azure-registry
-- Push to your Azure ACR
-- Find the right docker image
-- if not then build one
-- Devops pipeline
+- Push to your Azure ACR using docker task of Devops (not azure cli task)
+- Build a base image with Python only
+- Use the base image and add your custom Python scripts and requirements
+
 
 # Misc
 
