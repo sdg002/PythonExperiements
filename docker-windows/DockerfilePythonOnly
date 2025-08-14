@@ -5,7 +5,8 @@
 #
 # Copied from https://raw.githubusercontent.com/docker-library/python/refs/heads/master/3.13/windows/windowsservercore-ltsc2025/Dockerfile
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2025
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
+
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
