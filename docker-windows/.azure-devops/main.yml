@@ -1,9 +1,15 @@
-# Azure DevOps Pipeline for Windows
-# Starter pipeline for Python project on Windows
-
 trigger:
-  - main
-  - feature/*
+  branches:
+    - main
+
+  paths:
+    include:
+      - "docker-windows/*"
+
+pr:
+  paths:
+    include:
+      - "docker-windows/*"
 
 pool:
   vmImage: "windows-latest"
