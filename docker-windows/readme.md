@@ -14,6 +14,7 @@ https://hub.docker.com/_/python
 The latter looks more authorative. You will find images tagged with `windowsservercore`
 
 # Official Github site for Windows docker images
+
 https://github.com/docker-library/python/blob/master/3.13/windows/windowsservercore-ltsc2025/Dockerfile
 
 We can see the Dockerfile contents here for various versions of Python. 
@@ -25,6 +26,7 @@ Note - I see a Windows folder for the following versions of Python only:
 There are indeed Windows docker images with Python installed. But, only some of the vesions are installed
 
 ## How to create a Dockerfile with the desired version of Python?
+
 See the Dockerfile on Github link above
 
 ---

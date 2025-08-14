@@ -1,0 +1,45 @@
+trigger:
+  branches:
+    include:
+      - main
+      - master
+
+  paths:
+    include:
+      - "docker-windows/*"
+
+pool:
+  vmImage: "windows-latest"
+
+variables:
+  workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows"
+  imagetag: "$(Build.BuildId)"
+  containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
+  repositoryName: "python3.9-demo"
+  dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
+
+stages:
+  - stage: Build
+    displayName: "Build Stage"
+    jobs:
+      - job: BuildJob
+        displayName: "Build and Test"
+        steps:
+          - task: PowerShell@2
+            displayName: "Dump variables"
+            inputs:
+              targetType: "inline"
+              script: |
+                Write-Host "PowerShell task execution started"
+                dir env:
+              workingDirectory: "$(workingDirectory)"
+
+          - task: Docker@2
+            displayName: "Build and push Docker image"
+            inputs:
+              command: "buildAndPush"
+              dockerfile: "$(workingDirectory)/DockerfilePythonOnly"
+              buildContext: "$(workingDirectory)"
+              repository: "$(containerRegistry)/$(repositoryName)"
+              tags: $(imagetag)
+              containerRegistry: "$(dockerRegistryServiceConnection)"
