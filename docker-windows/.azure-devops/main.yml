@@ -50,9 +50,10 @@ stages:
               command: "build"
               dockerfile: "$(workingDirectory)/Dockerfile"
               buildContext: "$(workingDirectory)"
-              tags: |
-                python-demo:$(Build.BuildId)
-                python-demo:latest
+              repository: "python-demo"
+              tag: |
+                $(Build.BuildId)
+                latest
 
           - task: Docker@2
             displayName: "List all Docker images"
