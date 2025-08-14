@@ -45,6 +45,15 @@ stages:
             displayName: "Run Python application"
             workingDirectory: "$(workingDirectory)"
 
+          - task: PowerShell@2
+            displayName: "Run PowerShell script"
+            inputs:
+              targetType: "inline"
+              script: |
+                Write-Host "PowerShell task execution started"
+                dir env:
+              workingDirectory: "$(workingDirectory)"
+
   - stage: Docker
     displayName: "Docker Stage"
     dependsOn: Build
@@ -74,11 +83,9 @@ stages:
               docker --version
             displayName: "Verify built image and Docker info"
 
-          - task: Docker@2
+          - script: |
+              docker run --rm python-demo:$(imagetag)
             displayName: "Run Docker container"
-            inputs:
-              command: "run"
-              arguments: "--rm python-demo:$(imagetag)"
 
   - stage: Deploy
     displayName: "Deploy Stage"

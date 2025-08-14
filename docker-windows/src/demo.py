@@ -6,7 +6,7 @@ Skeletal Python script with logging, pandas operations, and proper exit handling
 import logging
 import sys
 import pandas as pd
-
+import os
 
 def setup_logging():
     """Setup basic logging configuration."""
@@ -32,6 +32,9 @@ def main():
         
         logging.info(f"Created pandas DataFrame with {len(df)} rows")
         logging.info(f"DataFrame columns: {list(df.columns)}")
+        logging.info(f"Displaying all the variables")
+        print(*os.environ.items(), sep="\n")
+        
 
         # Display the DataFrame
         print("\nSample DataFrame:")
