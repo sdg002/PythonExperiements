@@ -1,6 +1,8 @@
 trigger:
   branches:
-    - main
+    include:
+      - main
+      - master
 
   paths:
     include:
@@ -17,6 +19,7 @@ pool:
 variables:
   pythonVersion: "3.11"
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows"
+  imagetag: "$(Build.BuildId)"
 
 stages:
   - stage: Build
@@ -57,9 +60,7 @@ stages:
               dockerfile: "$(workingDirectory)/Dockerfile"
               buildContext: "$(workingDirectory)"
               repository: "python-demo"
-              tag: |
-                $(Build.BuildId)
-                latest
+              tags: $(imagetag)
 
           - task: Docker@2
             displayName: "List all Docker images"
@@ -77,7 +78,7 @@ stages:
             displayName: "Run Docker container"
             inputs:
               command: "run"
-              arguments: "--rm python-demo:latest"
+              arguments: "--rm python-demo:$(imagetag)"
 
   - stage: Deploy
     displayName: "Deploy Stage"
