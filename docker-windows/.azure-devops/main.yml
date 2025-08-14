@@ -46,7 +46,7 @@ stages:
             workingDirectory: "$(workingDirectory)"
 
           - task: PowerShell@2
-            displayName: "Run PowerShell script"
+            displayName: "Dump variables"
             inputs:
               targetType: "inline"
               script: |
