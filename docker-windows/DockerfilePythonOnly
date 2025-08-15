@@ -21,6 +21,10 @@ RUN $url = ('https://www.python.org/ftp/python/{0}/python-{1}-amd64.exe' -f ($en
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
 	Invoke-WebRequest -Uri $url -OutFile 'python.exe'; \
 	\
+	Write-Host "Displaying authenticode" \
+	$sig=Get-AuthenticodeSignature -FilePath 'python.exe' \
+	$sig \
+	Write-Host "Authenticode done" \
 	Write-Host ('Verifying sha256 ({0}) ...' -f $env:PYTHON_SHA256); \
 	if ((Get-FileHash python.exe -Algorithm sha256).Hash -ne $env:PYTHON_SHA256) { \
 	Write-Host 'FAILED!'; \
