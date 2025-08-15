@@ -57,3 +57,6 @@ docker push <REGISTRY_HOST>:<REGISTRY_PORT>/<APPNAME>:<APPVERSION>
 ```
 https://stackoverflow.com/a/45312996/2989655
 
+
+## Verify a downloaded file using ASC 
+https://crypto.stackexchange.com/questions/43537/verifying-a-downloaded-file-with-an-asc-file

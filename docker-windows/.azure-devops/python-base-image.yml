@@ -17,7 +17,7 @@ variables:
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows"
   imagetag: "$(Build.BuildId)"
   containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
-  repositoryName: "python3.9-demo"
+  repositoryName: "python3.9-baseimage"
   dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
 
 stages:
@@ -45,3 +45,12 @@ stages:
               repository: "$(containerRegistry)/$(repositoryName)"
               tags: $(imagetag)
               containerRegistry: "$(dockerRegistryServiceConnection)"
+
+          - task: Docker@2
+            displayName: "List all Docker images"
+            inputs:
+              command: "images"
+
+          - script: |
+              docker run --rm $(containerRegistry)/$(repositoryName):$(imagetag) python -c --version
+            displayName: "Run Docker container"
