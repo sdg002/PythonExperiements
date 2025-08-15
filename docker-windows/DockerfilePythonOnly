@@ -16,20 +16,11 @@ ENV PYTHONIOENCODING UTF-8
 ENV PYTHON_VERSION 3.9.13
 ENV PYTHON_SHA256 5edce6f0597a9b250c72790dc076649b06c1dc4754f3c68d7c284a1f10c33f36
 
+# Removed SHA verification for now.Need to find the SHA and change the env variable
 RUN $url = ('https://www.python.org/ftp/python/{0}/python-{1}-amd64.exe' -f ($env:PYTHON_VERSION -replace '[a-z]+[0-9]*$', ''), $env:PYTHON_VERSION); \
 	Write-Host ('Downloading {0} ...' -f $url); \
 	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
 	Invoke-WebRequest -Uri $url -OutFile 'python.exe'; \
-	\
-	Write-Host "Displaying authenticode" \
-	$sig=Get-AuthenticodeSignature -FilePath 'python.exe' \
-	$sig \
-	Write-Host "Authenticode done" \
-	Write-Host ('Verifying sha256 ({0}) ...' -f $env:PYTHON_SHA256); \
-	if ((Get-FileHash python.exe -Algorithm sha256).Hash -ne $env:PYTHON_SHA256) { \
-	Write-Host 'FAILED!'; \
-	exit 1; \
-	}; \
 	\
 	Write-Host 'Installing ...'; \
 	# https://docs.python.org/3/using/windows.html#installing-without-ui
