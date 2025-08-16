@@ -5,8 +5,9 @@
 #
 # Copied from https://raw.githubusercontent.com/docker-library/python/refs/heads/master/3.13/windows/windowsservercore-ltsc2025/Dockerfile
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
-
+#FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows/nanoserver:ltsc2019
+#https://hub.docker.com/r/microsoft/windows-nanoserver
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
@@ -18,45 +19,46 @@ ENV PYTHON_SHA256 5edce6f0597a9b250c72790dc076649b06c1dc4754f3c68d7c284a1f10c33f
 
 # Removed SHA verification for now.Need to find the SHA and change the env variable
 RUN $url = ('https://www.python.org/ftp/python/{0}/python-{1}-amd64.exe' -f ($env:PYTHON_VERSION -replace '[a-z]+[0-9]*$', ''), $env:PYTHON_VERSION); \
-	Write-Host ('Downloading {0} ...' -f $url); \
-	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
-	Invoke-WebRequest -Uri $url -OutFile 'python.exe'; \
-	\
-	Write-Host 'Installing ...'; \
-	# https://docs.python.org/3/using/windows.html#installing-without-ui
-	$exitCode = (Start-Process python.exe -Wait -NoNewWindow -PassThru \
+Write-Host ('Downloading {0} ...' -f $url); \
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; \
+Invoke-WebRequest -Uri $url -OutFile 'python.exe'; \
+\
+Write-Host 'Installing ...'; \
+# https://docs.python.org/3/using/windows.html#installing-without-ui
+$exitCode = (Start-Process python.exe -Wait -NoNewWindow -PassThru \
 	-ArgumentList @( \
-	'/quiet', \
-	'InstallAllUsers=1', \
-	'TargetDir=C:\Python', \
-	'PrependPath=1', \
-	'Shortcuts=0', \
-	'Include_doc=0', \
-	'Include_pip=1', \
-	'Include_test=0' \
+		'/quiet', \
+		'InstallAllUsers=1', \
+		'TargetDir=C:\Python', \
+		'PrependPath=1', \
+		'Shortcuts=0', \
+		'Include_doc=0', \
+		'Include_pip=1', \
+		'Include_test=0' \
 	) \
-	).ExitCode; \
-	if ($exitCode -ne 0) { \
+).ExitCode; \
+if ($exitCode -ne 0) {
+ \
 	Write-Host ('Running python installer failed with exit code: {0}' -f $exitCode); \
 	Get-ChildItem $env:TEMP | Sort-Object -Descending -Property LastWriteTime | Select-Object -First 1 | Get-Content; \
 	exit $exitCode; \
-	} \
-	\
-	# the installer updated PATH, so we should refresh our local value
-	$env:PATH = [Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine); \
-	\
-	Write-Host 'Verifying install ...'; \
-	Write-Host '  python --version'; python --version; \
-	\
-	Write-Host 'Removing ...'; \
-	Remove-Item python.exe -Force; \
-	Remove-Item $env:TEMP/Python*.log -Force; \
-	\
-	$env:PYTHONDONTWRITEBYTECODE = '1'; \
-	\
-	Write-Host 'Verifying pip install ...'; \
-	pip --version; \
-	\
-	Write-Host 'Complete.'
+} \
+\
+# the installer updated PATH, so we should refresh our local value
+$env:PATH = [Environment]::GetEnvironmentVariable('PATH', [EnvironmentVariableTarget]::Machine); \
+\
+Write-Host 'Verifying install ...'; \
+Write-Host '  python --version'; python --version; \
+\
+Write-Host 'Removing ...'; \
+Remove-Item python.exe -Force; \
+Remove-Item $env:TEMP/Python*.log -Force; \
+\
+$env:PYTHONDONTWRITEBYTECODE = '1'; \
+\
+Write-Host 'Verifying pip install ...'; \
+pip --version; \
+\
+Write-Host 'Complete.'
 
 CMD ["python"]

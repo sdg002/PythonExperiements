@@ -1,4 +1,7 @@
 # Use Windows Server Core with Python
+#
+#In this Docker file are pulling an image with Python already installed
+#
 FROM python:3.13-windowsservercore
 
 # Set the working directory in the container

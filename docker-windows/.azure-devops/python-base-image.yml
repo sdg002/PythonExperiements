@@ -14,7 +14,7 @@ pool:
 
 variables:
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows"
-  imagetag: "$(Build.BuildId)"
+  imagetag: "$(BuildName)"
   containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
   repositoryName: "python3.9-baseimage"
   dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
@@ -63,4 +63,4 @@ stages:
 
           - script: |
               docker run --rm $(containerRegistry)/$(repositoryName):$(imagetag)  python --version
-            displayName: "Run Docker container"
+            displayName: "Check Python version in Docker"
