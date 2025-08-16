@@ -19,10 +19,18 @@ pool:
 variables:
   pythonVersion: "3.11"
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows"
-  imagetag: "$(Build.BuildId)"
+  imagetag: "$(BuildName)"
   containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
   repositoryName: "python-demo"
   dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
+  MajorVersion: '1'
+  MinorVersion: $[counter(variables['MajorVersion'], 1)]
+  ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
+    BuildName: $(MajorVersion).$(MinorVersion).$(rev:r)
+  ${{ else }}:
+    BuildName: $(MajorVersion).$(MinorVersion).$(rev:r)-beta
+
+name:  $(BuildName)
 
 stages:
   - stage: Build
