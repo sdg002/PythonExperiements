@@ -2,8 +2,7 @@
 #
 #In this Docker file are pulling an image with Python already installed
 #
-#FROM mcr.microsoft.com/windows/servercore:ltsc2019
-FROM mcr.microsoft.com/windows/nanoserver:ltsc2019
+FROM python:3.13-windowsservercore
 #https://hub.docker.com/r/microsoft/windows-nanoserver
 
 
