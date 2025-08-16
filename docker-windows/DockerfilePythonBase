@@ -5,8 +5,8 @@
 #
 # Copied from https://raw.githubusercontent.com/docker-library/python/refs/heads/master/3.13/windows/windowsservercore-ltsc2025/Dockerfile
 
-#FROM mcr.microsoft.com/windows/servercore:ltsc2019
-FROM mcr.microsoft.com/windows/nanoserver:ltsc2019
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
+#FROM mcr.microsoft.com/windows/nanoserver:ltsc2019 #Requires powershell
 #https://hub.docker.com/r/microsoft/windows-nanoserver
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
@@ -17,26 +17,6 @@ ENV PYTHONIOENCODING UTF-8
 ENV PYTHON_VERSION 3.9.13
 ENV PYTHON_SHA256 5edce6f0597a9b250c72790dc076649b06c1dc4754f3c68d7c284a1f10c33f36
 
-## Install PowerShell below
-# Download and install PowerShell
-ADD https://github.com/PowerShell/PowerShell/releases/download/v7.3.6/PowerShell-7.3.6-win-x64.zip C:\PowerShell.zip
-
-# Extract PowerShell
-RUN tar -xf C:\PowerShell.zip -C C:\PowerShell
-
-# Clean up zip file
-RUN del C:\PowerShell.zip
-
-# Add PowerShell to PATH
-RUN setx PATH "C:\PowerShell;%PATH%" /M
-
-# Set PowerShell as default shell
-SHELL ["C:\\PowerShell\\pwsh.exe", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
-
-# Test PowerShell installation
-RUN Write-Host "PowerShell installed successfully" -ForegroundColor Green
-
-## Install PowerShell above
 
 # Removed SHA verification for now.Need to find the SHA and change the env variable
 RUN $url = ('https://www.python.org/ftp/python/{0}/python-{1}-amd64.exe' -f ($env:PYTHON_VERSION -replace '[a-z]+[0-9]*$', ''), $env:PYTHON_VERSION); \
