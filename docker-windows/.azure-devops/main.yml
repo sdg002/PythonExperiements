@@ -25,10 +25,18 @@ variables:
   dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
   MajorVersion: '1'
   MinorVersion: $[counter(variables['MajorVersion'], 1)]
+  ReleaseBuildName: $(MajorVersion).$(MinorVersion).$(rev:r)
+  PreReleaseBuildName: $(MajorVersion).$(MinorVersion).$(rev:r)-beta
   ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
-    BuildName: "${{ variables.MajorVersion }}.${{ variables.MinorVersion }}.$(rev:r)"
+    BuildName: $(ReleaseBuildName)
   ${{ else }}:
-    BuildName: "${{ variables.MajorVersion }}.${{ variables.MinorVersion }}.$(rev:r)-beta"
+    BuildName: $(PreReleaseBuildName)
+
+
+  # ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
+  #   BuildName: "${{ variables.MajorVersion }}.${{ variables.MinorVersion }}.$(rev:r)"
+  # ${{ else }}:
+  #   BuildName: "${{ variables.MajorVersion }}.${{ variables.MinorVersion }}.$(rev:r)-beta"
 
 name: "${{ variables.BuildName }}"
 
