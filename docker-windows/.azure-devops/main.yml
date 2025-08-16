@@ -26,11 +26,12 @@ variables:
   MajorVersion: '1'
   MinorVersion: $[counter(variables['MajorVersion'], 1)]
   ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
-    BuildName: $(MajorVersion).$(MinorVersion).$(rev:r)
+    BuildName: "${{ variables.MajorVersion }}.${{ variables.MinorVersion }}.$(rev:r)"
   ${{ else }}:
-    BuildName: $(MajorVersion).$(MinorVersion).$(rev:r)-beta
+    BuildName: "${{ variables.MajorVersion }}.${{ variables.MinorVersion }}.$(rev:r)-beta"
 
-name:  $(BuildName)
+name: "${{ variables.BuildName }}"
+
 
 stages:
   - stage: Build
@@ -39,7 +40,17 @@ stages:
       - job: BuildJob
         displayName: "Build and Test"
         steps:
-          - task: UsePythonVersion@0
+          - task: PowerShell@2
+            displayName: "Dump variables"
+            inputs:
+              targetType: "inline"
+              script: |
+                Write-Host "PowerShell task execution started"
+                dir env:
+                exit(1)
+              workingDirectory: "$(workingDirectory)"
+
+              - task: UsePythonVersion@0
             displayName: "Set up Python $(pythonVersion)"
             inputs:
               versionSpec: "$(pythonVersion)"
@@ -56,14 +67,6 @@ stages:
             displayName: "Run Python application"
             workingDirectory: "$(workingDirectory)"
 
-          - task: PowerShell@2
-            displayName: "Dump variables"
-            inputs:
-              targetType: "inline"
-              script: |
-                Write-Host "PowerShell task execution started"
-                dir env:
-              workingDirectory: "$(workingDirectory)"
 
   - stage: Docker
     displayName: "Docker Stage"
