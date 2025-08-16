@@ -20,9 +20,7 @@ However, not all versions have the Windows installer. Refer this link for a [sum
 Yes.  Refer this [Github link](https://github.com/docker-library/python/blob/master/3.13/windows/windowsservercore-ltsc2025/Dockerfile) for a Dockerfile with Python 3.14 on windowsservercore
 
 
-
-
-
+---
 
 # What do we learn?
 
@@ -30,11 +28,17 @@ Yes.  Refer this [Github link](https://github.com/docker-library/python/blob/mas
 - There are indeed Windows docker images with Python installed. But, only some of the vesions are installed
 - You will need to verify the SHA signaure using PowerShell script. Refer sample from Github of Docker (link below)
 - The YAML property `vmImage` will influence which version of Windows base image to pull. Example: with  `windows-2019` you can use `mcr.microsoft.com/windows/servercore:ltsc2019` base image
-- Windows Nanoserver image does not have PowerShell
+- Windows **Nanoserver** image does not have **PowerShell**
 
-## How to create a Dockerfile with the desired version of Python?
+---
 
-See the Dockerfile on Github link above
+# What remains to be learnt/done ?
+
+1. Use the Windows Nano Server image for a lighter installation of Python (requires PowerShell, see probable [Dockerfile snippet](docs/installpowershell.md))
+
+# How to create a Dockerfile with the desired version of Python?
+
+See the Dockerfile on Github link of Docker Hub in the references
 
 ---
 
@@ -42,15 +46,15 @@ See the Dockerfile on Github link above
 
 ## All configurations
 
+1. Windows Nano Server
+1. Windows Sever Core
+1. Windows
+1. Windows Server
 https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/container-base-images
 
 ## Windows Nano server
 https://hub.docker.com/r/microsoft/windows-nanoserver
 
-# Next action item
-- Push to your Azure ACR using docker task of Devops (not azure cli task)
-- Build a base image with Python only
-- Use the base image and add your custom Python scripts and requirements
 
 ---
 
@@ -59,17 +63,18 @@ https://hub.docker.com/r/microsoft/windows-nanoserver
 ## Setting up a connection with Azure Container Registry for pushing images?
 ![alt text](docs/acr-service-connection.png)
 
-## YAML 
+## YAML pipeline
 
+### Essential variables
 You need the following variables:
 ```yml
 variables:
-  containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
+  containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL from Azure portal
   repositoryName: "python-demo"
-  dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
+  dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name (seep picture of how to configure a Service connection)
 ```
 
-Docker build and push
+### Docker build and push
 
 ```yml
         steps:
@@ -84,22 +89,21 @@ Docker build and push
               containerRegistry: "$(dockerRegistryServiceConnection)"
 ```
 
+## Output on Azure Container Registry
+
+![acr](docs/acr.png)
 
 ---
 
-# Misc
+# Misc/References
 
 ## Steps for pushing an image to a private repo
 
-```
-docker login <REGISTRY_HOST>:<REGISTRY_PORT>
-docker tag <IMAGE_ID> <REGISTRY_HOST>:<REGISTRY_PORT>/<APPNAME>:<APPVERSION>
-docker push <REGISTRY_HOST>:<REGISTRY_PORT>/<APPNAME>:<APPVERSION>
-```
 https://stackoverflow.com/a/45312996/2989655
 
 
 ## Verify a downloaded file using ASC 
+Need more information.
 https://crypto.stackexchange.com/questions/43537/verifying-a-downloaded-file-with-an-asc-file
 
 
