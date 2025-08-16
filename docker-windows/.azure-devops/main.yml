@@ -50,7 +50,7 @@ stages:
                 exit(1)
               workingDirectory: "$(workingDirectory)"
 
-              - task: UsePythonVersion@0
+          - task: UsePythonVersion@0
             displayName: "Set up Python $(pythonVersion)"
             inputs:
               versionSpec: "$(pythonVersion)"
