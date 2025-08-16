@@ -1,0 +1,123 @@
+[[_TOC_]]
+
+# Objective
+Experiment building docker images with Python using base Windows operating system.
+
+# How does it work ?
+- Take a base windows image (e.g. `mcr.microsoft.com/windows/servercore:ltsc2019`)
+- Download the required vesion of Python
+- Install Python
+
+---
+
+# Where can we find all the versions of Python ?
+The base URL for downloading is here https://www.python.org/ftp/python/. You will need to insert the version in the URL.
+However, not all versions have the Windows installer. Refer this link for a [summary of all versions](https://www.python.org/downloads/windows/) on Windows.
+
+---
+
+# Does Docker hub provide ready made Windows images with Python ?
+Yes.  Refer this [Github link](https://github.com/docker-library/python/blob/master/3.13/windows/windowsservercore-ltsc2025/Dockerfile) for a Dockerfile with Python 3.14 on windowsservercore
+
+
+---
+
+# What do we learn?
+
+- Not all Python versions are available on Windows
+- There are indeed Windows docker images with Python installed. But, only some of the vesions are installed
+- You will need to verify the SHA signaure using PowerShell script. Refer sample from Github of Docker (link below)
+- The YAML property `vmImage` will influence which version of Windows base image to pull. Example: with  `windows-2019` you can use `mcr.microsoft.com/windows/servercore:ltsc2019` base image
+- Windows **Nanoserver** image does not have **PowerShell**
+
+---
+
+# What remains to be learnt/done ?
+
+1. Use the Windows Nano Server image for a lighter installation of Python (requires PowerShell, see probable [Dockerfile snippet](docs/installpowershell.md))
+
+# How to create a Dockerfile with the desired version of Python?
+
+See the Dockerfile on Github link of Docker Hub in the references
+
+---
+
+# Windows docker images
+
+## All configurations
+
+1. Windows Nano Server
+1. Windows Sever Core
+1. Windows
+1. Windows Server
+https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/container-base-images
+
+## Windows Nano server
+https://hub.docker.com/r/microsoft/windows-nanoserver
+
+
+---
+
+# How to push images to Azure Container Registry ?
+
+## Setting up a connection with Azure Container Registry for pushing images?
+![alt text](docs/acr-service-connection.png)
+
+## YAML pipeline
+
+### Essential variables
+You need the following variables:
+```yml
+variables:
+  containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL from Azure portal
+  repositoryName: "python-demo"
+  dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name (seep picture of how to configure a Service connection)
+```
+
+### Docker build and push
+
+```yml
+        steps:
+          - task: Docker@2
+            displayName: "Build and push Docker image"
+            inputs:
+              command: "buildAndPush"
+              dockerfile: "$(workingDirectory)/Dockerfile"
+              buildContext: "$(workingDirectory)"
+              repository: "$(repositoryName)"
+              tags: $(imagetag)
+              containerRegistry: "$(dockerRegistryServiceConnection)"
+```
+
+## Output on Azure Container Registry
+
+![acr](docs/acr.png)
+
+---
+
+# Misc/References
+
+## Steps for pushing an image to a private repo
+
+https://stackoverflow.com/a/45312996/2989655
+
+
+## Verify a downloaded file using ASC 
+Need more information.
+https://crypto.stackexchange.com/questions/43537/verifying-a-downloaded-file-with-an-asc-file
+
+
+## Official Github site for Windows docker images
+
+https://github.com/docker-library/python/blob/master/3.13/windows/windowsservercore-ltsc2025/Dockerfile
+
+We can see the Dockerfile contents here for various versions of Python. 
+Note - I see a Windows folder for the following versions of Python only:
+1. 3.13
+1. 3.14-rc
+
+## Docker hub tags with Python and Windows
+https://hub.docker.com/r/winamd64/python/tags
+and this
+https://hub.docker.com/_/python
+The latter looks more authorative. You will find images tagged with `windowsservercore`
