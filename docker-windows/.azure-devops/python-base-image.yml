@@ -49,7 +49,7 @@ stages:
             displayName: "Build and push Docker image"
             inputs:
               command: "buildAndPush"
-              dockerfile: "$(workingDirectory)/DockerfilePythonOnly"
+              dockerfile: "$(workingDirectory)/DockerfilePythonBase"
               buildContext: "$(workingDirectory)"
               repository: "$(repositoryName)"
               tags: $(imagetag)

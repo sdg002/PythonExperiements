@@ -30,6 +30,7 @@ Yes.  Refer this [Github link](https://github.com/docker-library/python/blob/mas
 - There are indeed Windows docker images with Python installed. But, only some of the vesions are installed
 - You will need to verify the SHA signaure using PowerShell script. Refer sample from Github of Docker (link below)
 - The YAML property `vmImage` will influence which version of Windows base image to pull. Example: with  `windows-2019` you can use `mcr.microsoft.com/windows/servercore:ltsc2019` base image
+- Windows Nanoserver image does not have PowerShell
 
 ## How to create a Dockerfile with the desired version of Python?
 
@@ -51,6 +52,40 @@ https://hub.docker.com/r/microsoft/windows-nanoserver
 - Build a base image with Python only
 - Use the base image and add your custom Python scripts and requirements
 
+---
+
+# How to push images to Azure Container Registry ?
+
+## Setting up a connection with Azure Container Registry for pushing images?
+![alt text](docs/acr-service-connection.png)
+
+## YAML 
+
+You need the following variables:
+```yml
+variables:
+  containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
+  repositoryName: "python-demo"
+  dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
+```
+
+Docker build and push
+
+```yml
+        steps:
+          - task: Docker@2
+            displayName: "Build and push Docker image"
+            inputs:
+              command: "buildAndPush"
+              dockerfile: "$(workingDirectory)/Dockerfile"
+              buildContext: "$(workingDirectory)"
+              repository: "$(repositoryName)"
+              tags: $(imagetag)
+              containerRegistry: "$(dockerRegistryServiceConnection)"
+```
+
+
+---
 
 # Misc
 
