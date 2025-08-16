@@ -28,9 +28,9 @@ variables:
   ReleaseBuildName: $(MajorVersion).$(MinorVersion).0
   PreReleaseBuildName: $(MajorVersion).$(MinorVersion).$(Build.BuildId)-beta
   ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
-    BuildName: $(ReleaseBuildName)
+    BuildName: "${{ variables.ReleaseBuildName }}"
   ${{ else }}:
-    BuildName: $(PreReleaseBuildName)
+    BuildName: "${{ variables.PreReleaseBuildName }}"
 
 
   # ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
