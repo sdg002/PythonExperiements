@@ -62,5 +62,5 @@ stages:
               command: "images"
 
           - script: |
-              docker run --rm $(containerRegistry)/$(repositoryName):$(imagetag) python -c --version
+              docker run --rm $(containerRegistry)/$(repositoryName):$(imagetag)  python --version
             displayName: "Run Docker container"
