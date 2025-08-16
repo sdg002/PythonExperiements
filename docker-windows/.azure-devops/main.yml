@@ -33,11 +33,6 @@ variables:
     BuildName: "${{ variables.PreReleaseBuildName }}"
 
 
-  # ${{ if eq(variables['Build.SourceBranchName'], 'main') }}:
-  #   BuildName: "${{ variables.MajorVersion }}.${{ variables.MinorVersion }}.$(rev:r)"
-  # ${{ else }}:
-  #   BuildName: "${{ variables.MajorVersion }}.${{ variables.MinorVersion }}.$(rev:r)-beta"
-
 name: "${{ variables.BuildName }}"
 
 
@@ -55,7 +50,6 @@ stages:
               script: |
                 Write-Host "PowerShell task execution started"
                 dir env:
-                exit(1)
               workingDirectory: "$(workingDirectory)"
 
           - task: UsePythonVersion@0
