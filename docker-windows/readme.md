@@ -121,3 +121,23 @@ https://hub.docker.com/r/winamd64/python/tags
 and this
 https://hub.docker.com/_/python
 The latter looks more authorative. You will find images tagged with `windowsservercore`
+
+
+---
+
+# Building using Azure Container Registry
+
+## What was the Azure CLI command ?
+
+This assumes that the current working directory contains the docker file `DockerfilePythonBase`
+
+```
+az acr build --platform windows --registry mywin001vm --image viacmdline/sample:1.0 --file DockerfilePythonBase .
+```
+
+## How long did it take on first attemp ?
+Atleast 5 minutes
+
+
+## Does caching improve the subsequent build time ?
+??
