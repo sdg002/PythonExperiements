@@ -136,7 +136,7 @@ az acr build --platform windows --registry mywin001vm --image viacmdline/sample:
 ```
 
 ## How long did it take on first attemp ?
-Atleast 5 minutes
+7 minutes
 
 
 ## Does caching improve the subsequent build time ?
