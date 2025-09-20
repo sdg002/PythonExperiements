@@ -140,4 +140,18 @@ az acr build --platform windows --registry mywin001vm --image viacmdline/sample:
 
 
 ## Does caching improve the subsequent build time ?
-??
+Need to try this
+
+## Next step
+Make this into a mono-repo. 3 repos
+- One using standard Docker build and push a base Python image to ACR
+- Second using Azure ACR for build and push a base Python image. How long does it take?
+- Third one which uses Docker to build and push a custom Python built on the base Python image. How long does it take?
+
+1. 3 folders
+    1. base-python-image(BASE)
+    1. custom-python-app-acr-build
+    1. custom-python-app-docker-build
+1. Each folder with its own CI/CD pipeline
+1. Create 3 skeletal Azure pipelines in Azure Devops
+1. 
