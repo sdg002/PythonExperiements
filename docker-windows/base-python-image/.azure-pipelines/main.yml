@@ -54,8 +54,7 @@ stages:
               repository: "$(repositoryName)"
               tags: | 
                 $(imagetag)
-                ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:
-                  latest              
+                latest              
               containerRegistry: "$(dockerRegistryServiceConnection)"
               #repository: "$(containerRegistry)/$(repositoryName)"
 
