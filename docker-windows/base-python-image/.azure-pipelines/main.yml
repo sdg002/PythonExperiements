@@ -24,8 +24,10 @@ variables:
   PreReleaseBuildName: $(MajorVersion).$(MinorVersion).$(Build.BuildId)-beta
   ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
     BuildName: "${{ variables.ReleaseBuildName }}"
+    latestTag: "latest"
   ${{ else }}:
     BuildName: "${{ variables.PreReleaseBuildName }}"
+    latestTag: "beta-latest"
 
 name: "${{ variables.BuildName }}"
 
@@ -54,7 +56,7 @@ stages:
               repository: "$(repositoryName)"
               tags: | 
                 $(imagetag)
-                latest              
+                $(latestTag)
               containerRegistry: "$(dockerRegistryServiceConnection)"
               #repository: "$(containerRegistry)/$(repositoryName)"
 
