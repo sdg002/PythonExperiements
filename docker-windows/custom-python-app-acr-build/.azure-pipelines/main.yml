@@ -59,10 +59,10 @@ stages:
               scriptLocation: 'inlineScript'
               workingDirectory: "$(workingDirectory)"
               inlineScript: |
-                az acr build \
-                  --registry mywin001vm \
-                  --platform windows \
-                  --image $(repositoryName):$(imagetag) \
-                  --file $(workingDirectory)/Dockerfile \
+                az acr build `
+                  --registry mywin001vm `
+                  --platform windows `
+                  --image $(repositoryName):$(imagetag) `
+                  --file $(workingDirectory)/Dockerfile `
 
 #todo pass the build arg , the Dockerfile should know how from where to get the image
