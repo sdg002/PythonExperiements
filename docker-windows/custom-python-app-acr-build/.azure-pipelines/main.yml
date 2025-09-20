@@ -7,6 +7,9 @@ trigger:
   paths:
     include:
       - "docker-windows/custom-python-app-acr-build/*"
+    exclude:
+      - "docker-windows/docs/*"
+      - "docker-windows/docs/readme.md"
 
 pool:
   vmImage: "windows-2019"
