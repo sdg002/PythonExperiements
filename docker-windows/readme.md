@@ -58,7 +58,7 @@ https://hub.docker.com/r/microsoft/windows-nanoserver
 
 ---
 
-# How to push images to Azure Container Registry ?
+# How to push images from Azure Devops to Azure Container Registry ?
 
 ## Setting up a connection with Azure Container Registry for pushing images?
 ![alt text](docs/acr-service-connection.png)
@@ -142,7 +142,7 @@ az acr build --platform windows --registry mywin001vm --image viacmdline/sample:
 ## Does caching improve the subsequent build time ?
 Need to try this
 
-## Next step
+## Restructuring into 3 separate folders/pipelines (WORK IN PROGRESS)
 Make this into a mono-repo. 3 repos
 - One using standard Docker build and push a base Python image to ACR
 - Second using Azure ACR for build and push a base Python image. How long does it take?
@@ -154,3 +154,22 @@ Make this into a mono-repo. 3 repos
     1. custom-python-app-docker-build
 1. Each folder with its own CI/CD pipeline
 1. Create 3 skeletal Azure pipelines in Azure Devops
+
+---
+
+# Understanding the folder structure
+
+The objective was to build a base Python image and then re-use this image to build a custom Python app image. The custom Python app image has been build using 2 approaches
+1. Traditional Docker build
+2. Offloading the build to Azure ACR via CLI
+
+## base-python-image
+In this folder we are 
+1. building a base Python image
+2. pushing the image to Azure container registry
+
+## custom-python-app-image-acr-build
+TO BE DONE
+
+## custom-python-app-image-docker-build
+TO BE DONE
