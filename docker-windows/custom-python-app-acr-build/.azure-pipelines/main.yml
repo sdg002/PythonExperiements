@@ -1,0 +1,48 @@
+trigger:
+  branches:
+    include:
+      - main
+      - master
+
+  paths:
+    include:
+      - "docker-windows/custom-python-app-acr-build/*"
+
+pool:
+  vmImage: "windows-2019"
+
+
+variables:
+  workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows/custom-python-app-acr-build"
+  imagetag: "$(BuildName)"
+  containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
+  repositoryName: "python3.9-baseimage"
+  dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
+  MajorVersion: '1'
+  MinorVersion: $[counter(variables['MajorVersion'], 1)]
+  ReleaseBuildName: $(MajorVersion).$(MinorVersion).0
+  PreReleaseBuildName: $(MajorVersion).$(MinorVersion).$(Build.BuildId)-beta
+  ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
+    BuildName: "${{ variables.ReleaseBuildName }}"
+    latestTag: "latest"
+  ${{ else }}:
+    BuildName: "${{ variables.PreReleaseBuildName }}"
+    latestTag: "beta-latest"
+
+name: "${{ variables.BuildName }}"
+
+stages:
+  - stage: Build
+    displayName: "Build Stage"
+    jobs:
+      - job: BuildJob
+        displayName: "Build and Test"
+        steps:
+          - task: PowerShell@2
+            displayName: "Dump variables"
+            inputs:
+              targetType: "inline"
+              script: |
+                Write-Host "PowerShell task execution started"
+                dir env:
+              workingDirectory: "$(workingDirectory)"
