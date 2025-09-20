@@ -170,7 +170,19 @@ In this folder we are
 2. pushing the image to Azure container registry
 
 ## custom-python-app-image-acr-build
-TO BE DONE
+work in progress
 
+Specify the base Python image
+```dockerfile
+FROM myregistry.azurecr.io/python-base:latest
+```
+
+Example of parameterization of the Azure registry name
+```dockerfile
+ARG REGISTRY=myregistry.azurecr.io
+FROM ${REGISTRY}/python-base:latest
+```
+
+ 
 ## custom-python-app-image-docker-build
 TO BE DONE
