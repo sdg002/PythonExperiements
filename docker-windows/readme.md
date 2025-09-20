@@ -154,4 +154,3 @@ Make this into a mono-repo. 3 repos
     1. custom-python-app-docker-build
 1. Each folder with its own CI/CD pipeline
 1. Create 3 skeletal Azure pipelines in Azure Devops
-1. 
