@@ -18,6 +18,7 @@ variables:
   containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
   repositoryName: "python3.9-customapp-acr"
   dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
+  azureSubscription: "azure pay as you go demo (sep 21)"  # Replace with your Azure service connection name
   MajorVersion: '1'
   MinorVersion: $[counter(variables['MajorVersion'], 1)]
   ReleaseBuildName: $(MajorVersion).$(MinorVersion).0
@@ -28,7 +29,7 @@ variables:
   ${{ else }}:
     BuildName: "${{ variables.PreReleaseBuildName }}"
     latestTag: "beta-latest"
-
+  
 name: "${{ variables.BuildName }}"
 
 stages:
@@ -50,7 +51,7 @@ stages:
           - task: AzureCLI@2
             displayName: 'ACR Build Image'
             inputs:
-              azureSubscription: '<your-service-connection-name>'
+              azureSubscription: $(azureSubscription)
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: |
@@ -60,3 +61,5 @@ stages:
                   --image $(repositoryName):$(imagetag) \
                   --file $(workingDirectory)/Dockerfile \
                   $(workingDirectory)
+
+                  --todo pass the build arg , the Dockerfile should know how from where to get the image
