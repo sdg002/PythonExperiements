@@ -29,6 +29,7 @@ Yes.  Refer this [Github link](https://github.com/docker-library/python/blob/mas
 - You will need to verify the SHA signaure using PowerShell script. Refer sample from Github of Docker (link below)
 - The YAML property `vmImage` will influence which version of Windows base image to pull. Example: with  `windows-2019` you can use `mcr.microsoft.com/windows/servercore:ltsc2019` base image
 - Windows **Nanoserver** image does not have **PowerShell**
+- The concept of tagging an image as `latest` is purely conventional. This is not determined automatically. Any image could be tagged as `latest` - you will need to do it when publishing the pipeline
 
 ---
 
