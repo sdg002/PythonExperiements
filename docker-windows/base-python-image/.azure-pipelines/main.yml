@@ -13,7 +13,7 @@ pool:
 
 
 variables:
-  workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows"
+  workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows/base-python-image"
   imagetag: "$(BuildName)"
   containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
   repositoryName: "python3.9-baseimage"
@@ -49,7 +49,7 @@ stages:
             displayName: "Build and push Docker image"
             inputs:
               command: "buildAndPush"
-              dockerfile: "$(workingDirectory)/DockerfilePythonBase"
+              dockerfile: "$(workingDirectory)/Dockerfile"
               buildContext: "$(workingDirectory)"
               repository: "$(repositoryName)"
               tags: $(imagetag)
