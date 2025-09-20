@@ -6,7 +6,7 @@ trigger:
 
   paths:
     include:
-      - "docker-windows/*"
+      - "docker-windows/base-python-image/*"
 
 pool:
   vmImage: "windows-2019"
