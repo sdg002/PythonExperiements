@@ -52,7 +52,10 @@ stages:
               dockerfile: "$(workingDirectory)/Dockerfile"
               buildContext: "$(workingDirectory)"
               repository: "$(repositoryName)"
-              tags: $(imagetag)
+              tags: | 
+                $(imagetag)
+                ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:
+                  latest              
               containerRegistry: "$(dockerRegistryServiceConnection)"
               #repository: "$(containerRegistry)/$(repositoryName)"
 
