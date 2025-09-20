@@ -16,7 +16,7 @@ variables:
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows/custom-python-app-acr-build"
   imagetag: "$(BuildName)"
   containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
-  repositoryName: "python3.9-baseimage"
+  repositoryName: "python3.9-customapp-acr"
   dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
   MajorVersion: '1'
   MinorVersion: $[counter(variables['MajorVersion'], 1)]
@@ -46,3 +46,17 @@ stages:
                 Write-Host "PowerShell task execution started"
                 dir env:
               workingDirectory: "$(workingDirectory)"
+
+          - task: AzureCLI@2
+            displayName: 'ACR Build Image'
+            inputs:
+              azureSubscription: '<your-service-connection-name>'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az acr build \
+                  --registry mywin001vm \
+                  --platform windows \
+                  --image $(repositoryName):$(imagetag) \
+                  --file $(workingDirectory)/Dockerfile \
+                  $(workingDirectory)
