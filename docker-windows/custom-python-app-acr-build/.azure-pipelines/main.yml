@@ -65,4 +65,4 @@ stages:
                   --file $(workingDirectory)/Dockerfile \
                   $(workingDirectory)
 
-                  --todo pass the build arg , the Dockerfile should know how from where to get the image
+#todo pass the build arg , the Dockerfile should know how from where to get the image
