@@ -1,7 +1,8 @@
 #
 #In this Docker file are pulling an image from ACR with Python already installed
 #
-FROM mywin001vm.azurecr.io/python3.9-baseimage:latest
+ARG BASE_REGISTRY
+FROM ${BASE_REGISTRY}/python3.9-baseimage:latest
 
 
 # Set the working directory in the container
