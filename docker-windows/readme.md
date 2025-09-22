@@ -143,6 +143,24 @@ az acr build --platform windows --registry mywin001vm --image viacmdline/sample:
 ## Does caching improve the subsequent build time ?
 Need to try this
 
+## How to run an image from Azure Container registry?
+
+You need to do an `acr login`
+
+```
+az acr login mywin001vm.azurecr.io
+```
+
+Followed by `docker pull`
+
+```
+docker pull mywin001vm.azurecr.io/python3.9-customapp-acr:1.15.1540-beta
+```
+
+
+
+
+
 ## Restructuring into 3 separate folders/pipelines (WORK IN PROGRESS)
 Make this into a mono-repo. 3 repos
 - One using standard Docker build and push a base Python image to ACR
