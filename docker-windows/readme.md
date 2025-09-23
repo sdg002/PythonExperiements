@@ -158,37 +158,24 @@ docker pull mywin001vm.azurecr.io/python3.9-customapp-acr:1.15.1540-beta
 ```
 
 
-
-
-
-## Restructuring into 3 separate folders/pipelines (WORK IN PROGRESS)
-Make this into a mono-repo. 3 repos
-- One using standard Docker build and push a base Python image to ACR
-- Second using Azure ACR for build and push a base Python image. How long does it take?
-- Third one which uses Docker to build and push a custom Python built on the base Python image. How long does it take?
-
-1. 3 folders
-    1. base-python-image(BASE)
-    1. custom-python-app-acr-build
-    1. custom-python-app-docker-build
-1. Each folder with its own CI/CD pipeline
-1. Create 3 skeletal Azure pipelines in Azure Devops
-
----
-
 # Understanding the folder structure
-
+This folder is structured into a mono-repo comprising of 3 folders. Each folder has its own CI/CD pipeline.
 The objective was to build a base Python image and then re-use this image to build a custom Python app image. The custom Python app image has been build using 2 approaches
 1. Traditional Docker build
 2. Offloading the build to Azure ACR via CLI
 
-## base-python-image
-In this folder we are 
+## 1-base-python-image
+In this folder we are:
 1. building a base Python image
 2. pushing the image to Azure container registry
+1. Takes over 6 minutes
 
-## custom-python-app-image-acr-build
-work in progress
+## 2-custom-python-app-image-acr-build
+In this folder we are:
+1. Pulling the base image built in previous step
+1. Copy over Python source and unit test
+1. Build and push a new image
+1. Takes over 5 minutes (we can see the base image being cached)
 
 Specify the base Python image
 ```dockerfile
@@ -202,5 +189,5 @@ FROM ${REGISTRY}/python-base:latest
 ```
 
  
-## custom-python-app-image-docker-build
-TO BE DONE
+## 3-custom-python-app-image-docker-build
+TO BE DONE (Objective is to do a custom build , purely using docker and not Azure ACR)
