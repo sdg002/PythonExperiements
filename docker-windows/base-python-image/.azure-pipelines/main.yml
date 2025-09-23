@@ -7,6 +7,17 @@ trigger:
   paths:
     include:
       - "docker-windows/base-python-image/*"
+    exclude:
+      - "docker-windows/docs/*"
+      - "docker-windows/docs/readme.md"
+
+pr:
+  paths:
+    include:
+      - "docker-windows/base-python-image/*"
+    exclude:
+      - "docker-windows/docs/*"
+      - "docker-windows/docs/readme.md"
 
 pool:
   vmImage: "windows-2019"

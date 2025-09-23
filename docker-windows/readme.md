@@ -187,7 +187,6 @@ Example of parameterization of the Azure registry name
 ARG REGISTRY=myregistry.azurecr.io
 FROM ${REGISTRY}/python-base:latest
 ```
-
  
 ## 3-custom-python-app-image-docker-build
-TO BE DONE (Objective is to do a custom build , purely using docker and not Azure ACR)
+Objective is to do a custom build , purely using docker and not Azure ACR)
