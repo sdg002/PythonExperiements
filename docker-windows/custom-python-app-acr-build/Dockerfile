@@ -14,6 +14,8 @@ COPY pytest.ini .
 RUN pip install --no-cache-dir -r requirements.txt
 # Copy the source code
 COPY src/ ./src/
+COPY tests/ ./tests/
+
 
 # Run pytest during build
 ENV PYTHONPATH=/app/src;/app;/app/tests
