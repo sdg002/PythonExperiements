@@ -11,6 +11,5 @@ def test_basic_math():
     assert 10 - 5 == 5
     assert 3 * 4 == 12
     assert 15 / 3 == 5
-    y=1/0
     logging.info("Basic math tests passed")
 
