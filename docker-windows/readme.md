@@ -143,7 +143,7 @@ az acr build --platform windows --registry mywin001vm --image viacmdline/sample:
 ## Does caching improve the subsequent build time ?
 Need to try this
 
-## How to run an image from Azure Container registry?
+## How to pull an image from Azure Container registry?
 
 You need to do an `acr login`
 
@@ -190,3 +190,15 @@ FROM ${REGISTRY}/python-base:latest
  
 ## 3-custom-python-app-image-docker-build
 Objective is to do a custom build , purely using docker and not Azure ACR)
+
+# Running the pytests during image building
+
+This is a nice idea. You will need to have the following in your Dockerfile. 
+
+1. `COPY pytest.ini .`
+1. `COPY tests/ ./tests/`
+1. `ENV PYTHONPATH=/app/src;/app;/app/tests`
+1. `RUN python -m pytest tests/ -v --tb=short`
+
+
+![run the unit tests](docs/run-unit-tests.png)
