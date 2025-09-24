@@ -25,7 +25,7 @@ pool:
 
 variables:
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows/custom-python-app-acr-build"
-  imagetag: "$(BuildName)"
+  imagetag: $(Build.BuildNumber)
   containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
   repositoryName: "python3.9-customapp-acr"
   dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
@@ -66,4 +66,4 @@ stages:
               scriptType: ps
               scriptLocation: 'inlineScript'
               workingDirectory: $(workingDirectory)
-              inlineScript: az acr build --registry $(containerRegistry) --platform windows --image $(repositoryName):$(imagetag) --build-arg BASE_REGISTRY=$(containerRegistry) --file Dockerfile .
+              inlineScript: az acr build --registry $(containerRegistry) --platform windows --image $(repositoryName):$(imagetag) --image $(repositoryName):$(latestTag) --build-arg BASE_REGISTRY=$(containerRegistry) --file Dockerfile .
