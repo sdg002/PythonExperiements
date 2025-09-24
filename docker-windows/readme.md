@@ -30,6 +30,11 @@ Yes.  Refer this [Github link](https://github.com/docker-library/python/blob/mas
 - The YAML property `vmImage` will influence which version of Windows base image to pull. Example: with  `windows-2019` you can use `mcr.microsoft.com/windows/servercore:ltsc2019` base image
 - Windows **Nanoserver** image does not have **PowerShell**
 - The concept of tagging an image as `latest` is purely conventional. This is not determined automatically. Any image could be tagged as `latest` - you will need to do it when publishing the pipeline
+- Cannot do a `RUN pip install --upgrade pip` step because of permissions issue: 
+
+```
+ERROR: Could not install packages due to an OSError: [WinError 5] Access is denied: 'C:\\Python\\~cripts\\pip.exe
+```
 
 ---
 
@@ -143,34 +148,39 @@ az acr build --platform windows --registry mywin001vm --image viacmdline/sample:
 ## Does caching improve the subsequent build time ?
 Need to try this
 
-## Restructuring into 3 separate folders/pipelines (WORK IN PROGRESS)
-Make this into a mono-repo. 3 repos
-- One using standard Docker build and push a base Python image to ACR
-- Second using Azure ACR for build and push a base Python image. How long does it take?
-- Third one which uses Docker to build and push a custom Python built on the base Python image. How long does it take?
+## How to pull an image from Azure Container registry?
 
-1. 3 folders
-    1. base-python-image(BASE)
-    1. custom-python-app-acr-build
-    1. custom-python-app-docker-build
-1. Each folder with its own CI/CD pipeline
-1. Create 3 skeletal Azure pipelines in Azure Devops
+You need to do an `acr login`
 
----
+```
+az acr login mywin001vm.azurecr.io
+```
+
+Followed by `docker pull`
+
+```
+docker pull mywin001vm.azurecr.io/python3.9-customapp-acr:1.15.1540-beta
+```
+
 
 # Understanding the folder structure
-
+This folder is structured into a mono-repo comprising of 3 folders. Each folder has its own CI/CD pipeline.
 The objective was to build a base Python image and then re-use this image to build a custom Python app image. The custom Python app image has been build using 2 approaches
 1. Traditional Docker build
 2. Offloading the build to Azure ACR via CLI
 
-## base-python-image
-In this folder we are 
+## 1-base-python-image
+In this folder we are:
 1. building a base Python image
 2. pushing the image to Azure container registry
+1. Takes over 6 minutes
 
-## custom-python-app-image-acr-build
-work in progress
+## 2-custom-python-app-image-acr-build
+In this folder we are:
+1. Pulling the base image built in previous step
+1. Copy over Python source and unit test
+1. Build and push a new image
+1. Takes over 5 minutes (we can see the base image being cached)
 
 Specify the base Python image
 ```dockerfile
@@ -182,7 +192,18 @@ Example of parameterization of the Azure registry name
 ARG REGISTRY=myregistry.azurecr.io
 FROM ${REGISTRY}/python-base:latest
 ```
-
  
-## custom-python-app-image-docker-build
-TO BE DONE
+## 3-custom-python-app-image-docker-build
+Objective is to do a custom build , purely using docker and not Azure ACR)
+
+# Running the pytests during image building
+
+This is a nice idea. You will need to have the following in your Dockerfile. 
+
+1. `COPY pytest.ini .`
+1. `COPY tests/ ./tests/`
+1. `ENV PYTHONPATH=/app/src;/app;/app/tests`
+1. `RUN python -m pytest tests/ -v --tb=short`
+
+
+![run the unit tests](docs/run-unit-tests.png)
