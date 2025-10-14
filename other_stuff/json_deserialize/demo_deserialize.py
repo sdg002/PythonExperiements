@@ -1,23 +1,29 @@
 import json
 import os
+from abc import ABC, abstractmethod
 
-# Define classes
-class Cat:
+# Define an abstract base class
+class AnimalBase(ABC):
     def __init__(self, age, name):
         self.age = age
         self.name = name
 
-class Dog:
-    def __init__(self, age, name):
-        self.age = age
-        self.name = name
+    @abstractmethod
+    def speak(self):
+        pass
 
-class Fish:
-    def __init__(self, age, name):
-        self.age = age
-        self.name = name
+# Modify Cat, Dog, and Fish to inherit from AnimalBase
+class Cat(AnimalBase):
+    def speak(self):
+        return "Meow"
 
+class Dog(AnimalBase):
+    def speak(self):
+        return "Woof"
 
+class Fish(AnimalBase):
+    def speak(self):
+        return "Blub"
 
 def main():
     # Load JSON
@@ -39,7 +45,7 @@ def main():
         
     # Example usage
     for animal in animals:
-        print(type(animal).__name__, animal.name, animal.age)
+        print(type(animal).__name__, animal.name, animal.age, animal.speak())
         pass
 
 if __name__ == "__main__":
