@@ -27,12 +27,22 @@ In simpler terms:
 
 # How to log the memory usage ?
 
+## Log the process specific memory
 See function `log_memory_usage` in the file [common.py](common.py)
 
 ```python
     process = psutil.Process(os.getpid())
     memory_info = process.memory_info()
     logging.info(f"Stage {stage[:30].ljust(30)} | RSS: {memory_info.rss / (1024 * 1024):>10.2f} MB | VMS: {memory_info.vms / (1024 * 1024):>10.2f} MB")
+```
+
+## Log the overall computer memory
+
+I tried but did not get any accurate statistic
+
+```python
+process = psutil.Process()
+logging.info(f"{process.memory_info().vms/(1024*1024):.2f} MB VMS")
 ```
 
 ---
