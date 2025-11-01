@@ -8,10 +8,10 @@ Simple experiments with launching processes from Python
 
 ---
 
-# Multi-processing demo
+# Multi-processing demo with logging
 
 ## Which file?
-See this [file](multi-processing.py)
+See this [file](multi_processing_with_logging.py)
 
 ## What did we do here?
 - Spawn multiple process with a limited process pool
