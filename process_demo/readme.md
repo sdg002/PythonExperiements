@@ -23,3 +23,11 @@ The child function does not have context of the parent process and hence logging
 But, we have to remember that the processes are not terminated, i.e the same process will be re-used for subsequent worker function invocation
 
 ---
+
+# Multi-processing demo with environment variable inheritance
+See this [file](multi_processing_environment_variabes.py)
+The child processes will inherit the variable set in the parent. This was expected
+
+# Multi-processing demo with Pandas dataframe
+See this [file](multi_processing_with_pandas.py)
+The child processes are generating a Pandas dataframe. The frames are joined into a single large frame in the caller process
