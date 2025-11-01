@@ -20,12 +20,13 @@ import feedparser
 
 
 BBC="http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml"
+YAHOO = "http://rss.news.yahoo.com/rss/oped"
 
 def main():
     try:
         logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
         logging.info("Starting the RSS demo script.")
-        feed = feedparser.parse(BBC)
+        feed = feedparser.parse(YAHOO)
         logging.info("Feed title: %s", feed.feed.title)
         logging.info("Feed link: %s", feed.feed.link)
         logging.info("Feed description: %s", feed.feed.description)
