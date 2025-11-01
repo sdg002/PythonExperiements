@@ -6,11 +6,11 @@ import numpy as np
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def log_memory_usage(stage):
+def log_memory_usage(stage: str):
     """Logs the current memory usage."""
     process = psutil.Process(os.getpid())
     memory_info = process.memory_info()
-    logging.info(f"Stage {stage}: RSS = {memory_info.rss / (1024 * 1024):.2f} MB, VMS = {memory_info.vms / (1024 * 1024):.2f} MB")
+    logging.info(f"Stage {stage[:30].ljust(30)} | RSS: {memory_info.rss / (1024 * 1024):>10.2f} MB | VMS: {memory_info.vms / (1024 * 1024):>10.2f} MB")
 
 def allocate_memory():
     """Allocates memory in stages and logs memory usage."""
@@ -32,8 +32,16 @@ def allocate_memory():
     large_dict = {i: i for i in range(10**6)}  # Approximately 32 MB
     log_memory_usage("After allocating large dictionary")
 
+    # Stage 5: Allocate a large dictionary
+    large_dict_5 = {i: i for i in range(10**6)}  # Approximately 32 MB
+    log_memory_usage("After allocating large dictionary")
+
+    # Stage 6: Allocate a large dictionary
+    large_dict_6 = {i: i for i in range(10**6)}  # Approximately 32 MB
+    log_memory_usage("After allocating large dictionary")
+
     # Prevent variables from being garbage collected immediately
-    return large_list, large_array, another_large_list, large_dict
+    return large_list, large_array, another_large_list, large_dict, large_dict_5, large_dict_6
 
 def main():
     try:
