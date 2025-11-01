@@ -1,6 +1,6 @@
 import logging
 import numpy as np
-from lib import log_memory_usage
+from common import log_memory_usage
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
