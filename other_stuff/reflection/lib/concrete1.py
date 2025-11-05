@@ -10,4 +10,5 @@ class Concrete1(SomeBase):
 
     def do_something(self):
         """Implementation of the abstract method."""
+        print("Concrete1 is doing something with name:", self.name)
         pass

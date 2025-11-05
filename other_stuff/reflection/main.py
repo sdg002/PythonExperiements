@@ -19,13 +19,19 @@ def display_all_concrete_classes(module):
     """Get all concrete classes in a module."""
     print(f"display_all_concrete_classes for module: {module}")
     classes_in_lib=inspect.getmembers(module, inspect.isclass)
-    concrete_classes = []
+    concrete_instances = []
     for name, cls in classes_in_lib:
         if not inspect.isabstract(cls) and issubclass(cls, lib.somebase.SomeBase):
             instance = cls("Example")
             print(f"Instantiated Concrete Class {name}: {instance}")
-            concrete_classes.append((name, cls))
-    return concrete_classes
+            concrete_instances.append((name, instance))
+    print("Going to invoke method using abstract method")
+    for concrete_instance in concrete_instances:
+        print(f"Invoking do_something on {concrete_instance[0]}")
+        instance: lib.SomeBase = concrete_instance[1]
+        instance.do_something()
+    print("All done")
+    return concrete_instances
 
 def display_all_functions(module):
     print("display_all_functions")
