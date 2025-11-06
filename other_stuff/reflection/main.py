@@ -1,5 +1,7 @@
 import inspect
-import lib as lib
+import sys
+import other_stuff.reflection.lib as lib
+import other_stuff.reflection.common as common
 
 def get_all_functions(module):
     """Get all functions in a module."""
@@ -21,7 +23,7 @@ def display_all_concrete_classes(module):
     classes_in_lib=inspect.getmembers(module, inspect.isclass)
     concrete_instances = []
     for name, cls in classes_in_lib:
-        if not inspect.isabstract(cls) and issubclass(cls, lib.somebase.SomeBase):
+        if not inspect.isabstract(cls) and issubclass(cls, common.SomeBase):
             instance = cls("Example")
             print(f"Instantiated Concrete Class {name}: {instance}")
             concrete_instances.append((name, instance))
@@ -49,8 +51,13 @@ def inspect_vars_items():
             print(f"Class: {name}")
 
 if __name__ == "__main__":
-    #print("This is the main module for reflection.") # __path__,__file__,__cached__
-    #display_all_functions(lib)
-    #display_all_classes(module=lib)
+    print("This is the main module for reflection.") # __path__,__file__,__cached__
+    # display_all_functions(lib)
+    # display_all_classes(module=lib)
     display_all_concrete_classes(module=lib)
     #inspect()
+    # c=lib.Class1()
+    # c.method1()
+
+    # x: lib.SomeBase = lib.Concrete1()
+    # x.do_something

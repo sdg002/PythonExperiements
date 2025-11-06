@@ -1,4 +1,4 @@
-from .somebase import SomeBase
+from ..common.somebase import SomeBase
 
 class Concrete1(SomeBase):
     """A skeletal class inheriting from SomeBase."""

@@ -1,4 +1,4 @@
-from .somebase import SomeBase
+from ..common.somebase import SomeBase
 
 class Concrete2(SomeBase):
     """Another skeletal class inheriting from SomeBase."""
@@ -11,4 +11,3 @@ class Concrete2(SomeBase):
     def do_something(self):
         """Implementation of the abstract method."""
         print("Concrete2 is doing something with name:", self.name)
-        
