@@ -1,3 +1,4 @@
+# This was the original approach - this is vanilla and one by one
 # from .class1 import Class1
 # from .class2 import Class2
 # from .somebase import SomeBase
