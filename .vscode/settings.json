@@ -1,0 +1,17 @@
+{
+    "autopep8.interpreter": [],
+    "autopep8.path": [],
+    "autopep8.args": [],
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "pylint.args": [
+        "--disable=C0116",
+        "--disable=C0114",
+        "--disable=W1203",
+        "--disable=C0415",
+        "--disable=W0718",
+        "--disable=W1309",
+        "--max-line-length=120"
+    ],
+}
