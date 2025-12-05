@@ -3,6 +3,7 @@ import argparse
 from sqlmodel import SQLModel, create_engine
 import sqlmodel as sqm
 from sqlmodeldemo.hero_model import Hero
+from sqlmodeldemo.crudfuncs import CrudFuncs
 
 SQLITE_URL = "sqlite:///database.db"
 
@@ -41,8 +42,8 @@ def parse_cmd_args() -> argparse.Namespace:
                             help="ID of the record to retrieve")
 
     # Parse the arguments
-    args = parser.parse_args()
-    return args
+    _args = parser.parse_args()
+    return _args
 
 
 def init_db() -> None:
@@ -55,12 +56,6 @@ def create_heroes(heroes: Iterable[Hero]) -> None:
         for hero in heroes:
             session.add(hero)
         session.commit()
-
-
-def list_heroes() -> List[Hero]:
-    with sqm.Session(engine) as session:
-        statement = sqm.select(Hero)
-        return session.exec(statement).all()
 
 
 def seed() -> None:
@@ -87,21 +82,27 @@ def update_hero_age(hero_id: int, age: int) -> Optional[Hero]:
 if __name__ == "__main__":
     args = parse_cmd_args()
     print(args)
-    engine = create_engine(SQLITE_URL, echo=True)
+    crud_funcs = CrudFuncs(connection_string=SQLITE_URL)
     if args.command == "seed":
+        engine = create_engine(SQLITE_URL, echo=True)
         seed()
         print("Database seeded.")
     elif args.command == "listall":
-        all_heroes = list_heroes()
+        all_heroes = crud_funcs.list_heroes()
         for hero in all_heroes:
             print(hero)
+    elif args.command == "delete":
+        print(f"Deleted hero with ID {args.id}")
+        crud_funcs.delete_hero(hero_id=args.id)
     elif args.command == "update":
-        engine = create_engine(SQLITE_URL, echo=True)
-        updated_hero = update_hero_age(args.id, args.age)
-        if updated_hero:
-            print(f"Updated Hero: {updated_hero}")
-        else:
-            print(f"No hero found with ID {args.id}")
+        print(f"Update hero with ID {args.id}")
+        raise NotImplementedError("Update command not implemented yet.")
+        # engine = create_engine(SQLITE_URL, echo=True)
+        # updated_hero = update_hero_age(args.id, args.age)
+        # if updated_hero:
+        #     print(f"Updated Hero: {updated_hero}")
+        # else:
+        #     print(f"No hero found with ID {args.id}")
     else:
         raise ValueError(f"Unsupported argument {args}")
     exit(0)
