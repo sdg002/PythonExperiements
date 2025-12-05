@@ -14,6 +14,7 @@ class CrudFuncs:
             f"Engine created with connection string: {connection_string}")
 
     def delete_hero(self, hero_id: int) -> bool:
+        logging.info(f"Deleting hero with ID: {hero_id}")
         with sqm.Session(self.engine) as session:
             hero = session.get(Hero, hero_id)
             if not hero:

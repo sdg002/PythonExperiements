@@ -1,4 +1,5 @@
-from typing import Iterable, List, Optional
+import logging
+from typing import Iterable, Optional
 import argparse
 from sqlmodel import SQLModel, create_engine
 import sqlmodel as sqm
@@ -80,8 +81,10 @@ def update_hero_age(hero_id: int, age: int) -> Optional[Hero]:
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s - %(levelname)s - %(message)s')
     args = parse_cmd_args()
-    print(args)
+    logging.info(f"Parsed arguments: {args}")
     crud_funcs = CrudFuncs(connection_string=SQLITE_URL)
     if args.command == "seed":
         engine = create_engine(SQLITE_URL, echo=True)
@@ -90,10 +93,11 @@ if __name__ == "__main__":
     elif args.command == "listall":
         all_heroes = crud_funcs.list_heroes()
         for hero in all_heroes:
-            print(hero)
+            logging.info(hero)
     elif args.command == "delete":
-        print(f"Deleted hero with ID {args.id}")
-        crud_funcs.delete_hero(hero_id=args.id)
+        logging.info(f"Deleted hero with ID {args.id}")
+        retval = crud_funcs.delete_hero(hero_id=args.id)
+        logging.info(f"Delete of ID={args.id} returned {retval}")
     elif args.command == "update":
         print(f"Update hero with ID {args.id}")
         raise NotImplementedError("Update command not implemented yet.")
