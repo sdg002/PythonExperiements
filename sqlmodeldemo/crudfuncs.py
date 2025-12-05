@@ -1,4 +1,5 @@
 import logging
+from typing import Iterable
 import sqlmodel as sqm
 from sqlmodeldemo.hero_model import Hero
 
@@ -27,3 +28,17 @@ class CrudFuncs:
         with sqm.Session(self.engine) as session:
             statement = sqm.select(Hero)
             return session.exec(statement).all()
+
+    def create_heroes(self, heroes: Iterable[Hero]) -> None:
+        with sqm.Session(self.engine) as session:
+            for hero in heroes:
+                session.add(hero)
+            session.commit()
+
+    def seed(self) -> None:
+        heroes = [
+            Hero(name="Spider-Boy", secret_name="Pedro Parqueador", age=15),
+            Hero(name="Captain North", secret_name="Bob Canada"),
+            Hero(name="Madame Invisible", secret_name="Jane Doe", age=32),
+        ]
+        self.create_heroes(heroes)

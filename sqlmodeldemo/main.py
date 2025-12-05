@@ -52,22 +52,6 @@ def init_db() -> None:
     # empty tables parameter - will not automatically create any table
 
 
-def create_heroes(heroes: Iterable[Hero]) -> None:
-    with sqm.Session(engine) as session:
-        for hero in heroes:
-            session.add(hero)
-        session.commit()
-
-
-def seed() -> None:
-    heroes = [
-        Hero(name="Spider-Boy", secret_name="Pedro Parqueador", age=15),
-        Hero(name="Captain North", secret_name="Bob Canada"),
-        Hero(name="Madame Invisible", secret_name="Jane Doe", age=32),
-    ]
-    create_heroes(heroes)
-
-
 def update_hero_age(hero_id: int, age: int) -> Optional[Hero]:
     with sqm.Session(engine) as session:
         hero = session.get(Hero, hero_id)
@@ -87,19 +71,18 @@ if __name__ == "__main__":
     logging.info(f"Parsed arguments: {args}")
     crud_funcs = CrudFuncs(connection_string=SQLITE_URL)
     if args.command == "seed":
-        engine = create_engine(SQLITE_URL, echo=True)
-        seed()
-        print("Database seeded.")
+        crud_funcs.seed()
+        logging.info("Database seeded successfully.")
     elif args.command == "listall":
         all_heroes = crud_funcs.list_heroes()
         for hero in all_heroes:
             logging.info(hero)
     elif args.command == "delete":
         logging.info(f"Deleted hero with ID {args.id}")
-        retval = crud_funcs.delete_hero(hero_id=args.id)
-        logging.info(f"Delete of ID={args.id} returned {retval}")
+        delete_status = crud_funcs.delete_hero(hero_id=args.id)
+        logging.info(f"Delete of ID={args.id} returned {delete_status}")
     elif args.command == "update":
-        print(f"Update hero with ID {args.id}")
+        logging.info(f"Update hero with ID {args.id}")
         raise NotImplementedError("Update command not implemented yet.")
         # engine = create_engine(SQLITE_URL, echo=True)
         # updated_hero = update_hero_age(args.id, args.age)
