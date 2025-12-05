@@ -1,7 +1,7 @@
-from typing import Iterable, List
+from typing import Iterable, List, Optional
 from sqlmodel import SQLModel, create_engine
-from sqlmodeldemo.hero_model import Hero
 import sqlmodel as sqm
+from sqlmodeldemo.hero_model import Hero
 
 SQLITE_URL = "sqlite:///database.db"
 
@@ -33,12 +33,25 @@ def seed() -> None:
     create_heroes(heroes)
 
 
+def update_hero_age(hero_id: int, age: int) -> Optional[Hero]:
+    with sqm.Session(engine) as session:
+        hero = session.get(Hero, hero_id)
+        if not hero:
+            return None
+        hero.age = age
+        session.add(hero)
+        session.commit()
+        session.refresh(hero)
+        return hero
+
+
 if __name__ == "__main__":
     engine = create_engine(SQLITE_URL, echo=True)
     init_db()
     print("This is the main module for sqlmodel.main")
     seed()
-    heroes = list_heroes()
-    for hero in heroes:
+    all_heroes = list_heroes()
+    for hero in all_heroes:
         print(hero)
     print("All done")
+    update_hero_age(all_heroes[0].id, 999)
