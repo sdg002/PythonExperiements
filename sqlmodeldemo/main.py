@@ -1,8 +1,5 @@
 import logging
-from typing import Optional
 import argparse
-import sqlmodel as sqm
-from sqlmodeldemo.hero_model import Hero
 from sqlmodeldemo.crudfuncs import CrudFuncs
 
 SQLITE_URL = "sqlite:///database.db"
@@ -67,8 +64,8 @@ if __name__ == "__main__":
         logging.info(f"Total heroes listed: {len(all_heroes)}")
     elif args.command == "delete":
         logging.info(f"Deleted hero with ID {args.id}")
-        delete_status = crud_funcs.delete_hero(hero_id=args.id)
-        logging.info(f"Delete of ID={args.id} returned {delete_status}")
+        _delete_status = crud_funcs.delete_hero(hero_id=int(args.id))
+        logging.info(f"Delete of ID={args.id} returned {_delete_status}")
     elif args.command == "update":
         logging.info(f"Update hero with ID {args.id}")
         crud_funcs.update_hero_age(hero_id=args.id, age=args.age)
@@ -76,8 +73,3 @@ if __name__ == "__main__":
     else:
         raise ValueError(f"Unsupported argument {args}")
     exit(0)
-    # init_db()
-    # print("This is the main module for sqlmodel.main")
-    # seed()
-    # print("All done")
-    # update_hero_age(all_heroes[0].id, 999)
