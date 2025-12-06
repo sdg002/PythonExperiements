@@ -19,6 +19,8 @@ def parse_cmd_args() -> argparse.Namespace:
         dest="command", required=True, help="Available commands")
 
     # Command: seed
+    subparsers.add_parser(
+        "initdb", help="Initialization step. A new database is created")
     subparsers.add_parser("seed", help="Seed the database with initial data")
 
     # Command: update
@@ -47,11 +49,6 @@ def parse_cmd_args() -> argparse.Namespace:
     return _args
 
 
-def init_db() -> None:
-    SQLModel.metadata.create_all(engine, tables=[Hero.__table__])
-    # empty tables parameter - will not automatically create any table
-
-
 def update_hero_age(hero_id: int, age: int) -> Optional[Hero]:
     with sqm.Session(engine) as session:
         hero = session.get(Hero, hero_id)
@@ -73,10 +70,14 @@ if __name__ == "__main__":
     if args.command == "seed":
         crud_funcs.seed()
         logging.info("Database seeded successfully.")
+    elif args.command == "initdb":
+        crud_funcs.init_db()
+        logging.info("Database initialized successfully.")
     elif args.command == "listall":
         all_heroes = crud_funcs.list_heroes()
         for hero in all_heroes:
             logging.info(hero)
+        logging.info(f"Total heroes listed: {len(all_heroes)}")
     elif args.command == "delete":
         logging.info(f"Deleted hero with ID {args.id}")
         delete_status = crud_funcs.delete_hero(hero_id=args.id)

@@ -14,6 +14,10 @@ class CrudFuncs:
         logging.info(
             f"Engine created with connection string: {connection_string}")
 
+    def init_db(self) -> None:
+        sqm.SQLModel.metadata.create_all(self.engine, tables=[Hero.__table__])
+        # empty tables parameter - will not automatically create any table
+
     def delete_hero(self, hero_id: int) -> bool:
         logging.info(f"Deleting hero with ID: {hero_id}")
         with sqm.Session(self.engine) as session:
@@ -42,3 +46,4 @@ class CrudFuncs:
             Hero(name="Madame Invisible", secret_name="Jane Doe", age=32),
         ]
         self.create_heroes(heroes)
+        logging.info(f"Database seeded with {len(heroes)} heroes.")
