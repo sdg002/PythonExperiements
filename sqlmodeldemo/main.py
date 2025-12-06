@@ -1,7 +1,6 @@
 import logging
-from typing import Iterable, Optional
+from typing import Optional
 import argparse
-from sqlmodel import SQLModel, create_engine
 import sqlmodel as sqm
 from sqlmodeldemo.hero_model import Hero
 from sqlmodeldemo.crudfuncs import CrudFuncs
@@ -49,18 +48,6 @@ def parse_cmd_args() -> argparse.Namespace:
     return _args
 
 
-def update_hero_age(hero_id: int, age: int) -> Optional[Hero]:
-    with sqm.Session(engine) as session:
-        hero = session.get(Hero, hero_id)
-        if not hero:
-            return None
-        hero.age = age
-        session.add(hero)
-        session.commit()
-        session.refresh(hero)
-        return hero
-
-
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
@@ -84,18 +71,13 @@ if __name__ == "__main__":
         logging.info(f"Delete of ID={args.id} returned {delete_status}")
     elif args.command == "update":
         logging.info(f"Update hero with ID {args.id}")
-        raise NotImplementedError("Update command not implemented yet.")
-        # engine = create_engine(SQLITE_URL, echo=True)
-        # updated_hero = update_hero_age(args.id, args.age)
-        # if updated_hero:
-        #     print(f"Updated Hero: {updated_hero}")
-        # else:
-        #     print(f"No hero found with ID {args.id}")
+        crud_funcs.update_hero_age(hero_id=args.id, age=args.age)
+        logging.info(f"Updated hero ID={args.id} to age={args.age}")
     else:
         raise ValueError(f"Unsupported argument {args}")
     exit(0)
-    init_db()
-    print("This is the main module for sqlmodel.main")
-    seed()
-    print("All done")
-    update_hero_age(all_heroes[0].id, 999)
+    # init_db()
+    # print("This is the main module for sqlmodel.main")
+    # seed()
+    # print("All done")
+    # update_hero_age(all_heroes[0].id, 999)

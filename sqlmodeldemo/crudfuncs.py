@@ -1,5 +1,5 @@
 import logging
-from typing import Iterable
+from typing import Iterable, Optional
 import sqlmodel as sqm
 from sqlmodeldemo.hero_model import Hero
 
@@ -47,3 +47,14 @@ class CrudFuncs:
         ]
         self.create_heroes(heroes)
         logging.info(f"Database seeded with {len(heroes)} heroes.")
+
+    def update_hero_age(self, hero_id: int, age: int) -> Optional[Hero]:
+        with sqm.Session(self.engine) as session:
+            hero = session.get(Hero, hero_id)
+            if not hero:
+                return None
+            hero.age = age
+            session.add(hero)
+            session.commit()
+            session.refresh(hero)
+            return hero
