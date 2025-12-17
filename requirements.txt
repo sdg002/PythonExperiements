@@ -20,3 +20,5 @@ keras
 feedparser
 svgwrite
 sqlmodel
+msal
+python-dotenv
