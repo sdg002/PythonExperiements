@@ -1,4 +1,16 @@
-# How to get the Azure CLI token id
+"""
+Understand MS graph permissions
+https://learn.microsoft.com/en-us/graph/permissions-reference
+
+
+In this code , I used the Azure AD CLI app id
+https://learn.microsoft.com/en-us/power-platform/admin/apps-to-allow
+
+I tried various scopes
+
+"""
+
+# How to get the Azure CLI app id  - this is the well published app
 # https://github.com/Azure/azure-cli/issues/28628
 # Given the client ID and tenant ID for an app registered in Azure,
 # provide a <ms-entra-id> access token and a refresh token.
@@ -6,19 +18,17 @@
 # If the caller is not already signed in to Azure, the caller's
 # web browser will prompt the caller to sign in first.
 
-# pip install msal
+
 import os
 from msal import PublicClientApplication
-import sys
 import dotenv
 
-# You can hard-code the registered app's client ID and tenant ID here,
-# or you can provide them as command-line arguments to this script.
 
 dotenv.load_dotenv(override=True)
-client_id = os.environ["AZURE_CLI_CLIENT_ID"]
+# did not work , Consent error
+azure_client_id = "04b07795-8ddb-461a-bbee-02f9e1bf7b46"
 tenant_id = os.environ["AZURE_TENANT_ID"]
-print(f"client_id: {client_id}, tenant_id: {tenant_id}")
+print(f"client_id: {azure_client_id}, tenant_id: {tenant_id}")
 
 # Do not modify this variable. It represents the programmatic ID for
 # Enter the scope of DB registar scope url.
@@ -29,11 +39,17 @@ print(f"client_id: {client_id}, tenant_id: {tenant_id}")
 # scopes = ["https://graph.microsoft.com/"] #did not work
 # he scope format is invalid. Scope must be in a valid URI form <https://example/scope> or a valid Guid <guid/scope>.
 
-scopes = ["https://graph.microsoft.com/.default"]  # this worked
+graph_scope = "https://graph.microsoft.com/.default"  # this worked
+sp_guid_scope = "00000003-0000-0ff1-ce00-000000000000"
+scopes = [sp_guid_scope]
+# this worked too az account get-access-token --scope "https://graph.microsoft.com/.default"
 app = PublicClientApplication(
-    client_id=client_id,
+    client_id=azure_client_id,
     authority=f"https://login.microsoftonline.com/{tenant_id}"
 )
+
+
+# try this scope https://stackoverflow.com/a/63386756/2989655
 
 acquire_tokens_result = app.acquire_token_interactive(
     scopes=scopes
