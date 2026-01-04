@@ -22,3 +22,6 @@ svgwrite
 sqlmodel
 msal
 python-dotenv
+opentelemetry-api
+#opentelemetry-exporter-console #this pacakge does not exist in pypi.org
+opentelemetry-sdk
