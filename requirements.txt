@@ -25,3 +25,8 @@ python-dotenv
 opentelemetry-api
 #opentelemetry-exporter-console #this pacakge does not exist in pypi.org
 opentelemetry-sdk
+# langchain course
+langchain
+langchain-openai
+langchain-anthropic
+
