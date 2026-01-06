@@ -6,6 +6,9 @@ from pydantic import BaseModel, ValidationError
 
 
 class Product(BaseModel):
+    """
+    A model representing a product with type coercion.
+    """
     name: str
     price: float
     in_stock: bool
