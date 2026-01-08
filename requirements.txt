@@ -29,5 +29,7 @@ opentelemetry-sdk
 langchain
 langchain-openai
 langchain-anthropic
+langchain-community
+# pydantic tutorial
 pydantic
 pydantic-settings
