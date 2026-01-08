@@ -6,6 +6,7 @@ name: action-002
 on:
     push:
         branches: ["master"]
+        paths: ["github-actions-demo/action-002/**"]
     pull_request:
         branches: ["master"]
         paths: ["github-actions-demo/action-002/**"]
