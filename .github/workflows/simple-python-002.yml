@@ -30,3 +30,7 @@ jobs:
             - name: Python script
               run: |
                   python github-actions-demo/action-002/hello.py
+
+            - name: Echo
+              run: |
+                  echo Hello from action-002
