@@ -8,7 +8,7 @@ on:
         branches: ["master"]
     pull_request:
         branches: ["master"]
-
+        paths: ["github-actions-demo/action-002/**"]
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -25,3 +25,7 @@ jobs:
             - name: Python version
               run: |
                   python --version
+
+            - name: Python script
+              run: |
+                  python github-actions-demo/action-002/hello.py
