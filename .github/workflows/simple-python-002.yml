@@ -6,7 +6,11 @@ name: action-002
 on:
     push:
         branches: ["master"]
-        paths: ["github-actions-demo/action-002/**"]
+        paths:
+            [
+                "github-actions-demo/action-002/**",
+                ".github/workflows/simple-python-002.yml",
+            ]
     pull_request:
         branches: ["master"]
         paths: ["github-actions-demo/action-002/**"]
