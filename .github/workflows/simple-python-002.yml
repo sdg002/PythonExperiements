@@ -1,0 +1,31 @@
+#
+#In this workflow, we will trigger on only when a specific folder is changed.
+#
+name: action-002
+
+on:
+    push:
+        branches: ["master"]
+    pull_request:
+        branches: ["master"]
+        paths: ["github-actions-demo/action-002/**"]
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.11"
+
+            - name: Python version
+              run: |
+                  python --version
+
+            - name: Python script
+              run: |
+                  python github-actions-demo/action-002/hello.py
