@@ -1,4 +1,5 @@
 [[_TOC_]]
+
 ---
 
 # 🧩 1. Define the Chatbot’s Scope
