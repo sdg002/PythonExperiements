@@ -22,14 +22,13 @@ pr:
 pool:
   vmImage: "windows-2019"
 
-
 variables:
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows/base-python-image"
   imagetag: "$(BuildName)"
-  containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
+  containerRegistry: "mywin001vm.azurecr.io" # Replace with your registry URL
   repositoryName: "python3.9-baseimage"
-  dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
-  MajorVersion: '1'
+  dockerRegistryServiceConnection: "mywin001vmAzureAcr" # Replace with your service connection name
+  MajorVersion: "1"
   MinorVersion: $[counter(variables['MajorVersion'], 1)]
   ReleaseBuildName: $(MajorVersion).$(MinorVersion).0
   PreReleaseBuildName: $(MajorVersion).$(MinorVersion).$(Build.BuildId)-beta
@@ -59,13 +58,13 @@ stages:
               workingDirectory: "$(workingDirectory)"
 
           - task: Docker@2
-            displayName: "Build and push Docker image"
+            displayName: "Build and push 39"
             inputs:
               command: "buildAndPush"
-              dockerfile: "$(workingDirectory)/Dockerfile"
+              dockerfile: "$(workingDirectory)/Dockerfile39"
               buildContext: "$(workingDirectory)"
               repository: "$(repositoryName)"
-              tags: | 
+              tags: |
                 $(imagetag)
                 $(latestTag)
               containerRegistry: "$(dockerRegistryServiceConnection)"
