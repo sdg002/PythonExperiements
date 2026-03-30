@@ -24,9 +24,9 @@ pool:
 
 variables:
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows/base-python-image"
-  imagetag: "$(BuildName)"
+  imagetag39: "$(BuildName)"
   containerRegistry: "mywin001vm.azurecr.io" # Replace with your registry URL
-  repositoryName: "python3.9-baseimage"
+  repositoryName39: "python3.9-baseimage"
   dockerRegistryServiceConnection: "mywin001vmAzureAcr" # Replace with your service connection name
   MajorVersion: "1"
   MinorVersion: $[counter(variables['MajorVersion'], 1)]
@@ -63,12 +63,12 @@ stages:
               command: "buildAndPush"
               dockerfile: "$(workingDirectory)/Dockerfile39"
               buildContext: "$(workingDirectory)"
-              repository: "$(repositoryName)"
+              repository: "$(repositoryName39)"
               tags: |
-                $(imagetag)
+                $(imagetag39)
                 $(latestTag)
               containerRegistry: "$(dockerRegistryServiceConnection)"
-              #repository: "$(containerRegistry)/$(repositoryName)"
+              #repository: "$(containerRegistry)/$(repositoryName39)"
 
           - task: Docker@2
             displayName: "List all Docker images"
@@ -76,5 +76,5 @@ stages:
               command: "images"
 
           - script: |
-              docker run --rm $(containerRegistry)/$(repositoryName):$(imagetag)  python --version
+              docker run --rm $(containerRegistry)/$(repositoryName39):$(imagetag39)  python --version
             displayName: "Check Python version in Docker"
