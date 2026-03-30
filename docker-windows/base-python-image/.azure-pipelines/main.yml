@@ -20,7 +20,7 @@ pr:
       - "docker-windows/docs/readme.md"
 
 pool:
-  vmImage: "windows-2019"
+  vmImage: "windows-2022"
 
 variables:
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows/base-python-image"

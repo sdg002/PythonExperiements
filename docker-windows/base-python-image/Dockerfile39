@@ -5,7 +5,7 @@
 #
 # Copied from https://raw.githubusercontent.com/docker-library/python/refs/heads/master/3.13/windows/windowsservercore-ltsc2025/Dockerfile
 
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
 #FROM mcr.microsoft.com/windows/nanoserver:ltsc2019 #Requires powershell
 #https://hub.docker.com/r/microsoft/windows-nanoserver
 
