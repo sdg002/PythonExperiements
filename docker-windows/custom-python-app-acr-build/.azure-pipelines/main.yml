@@ -26,7 +26,8 @@ variables:
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows/custom-python-app-acr-build"
   imagetag: $(Build.BuildNumber)
   containerRegistry: "mywin001vm.azurecr.io" # Replace with your registry URL
-  repositoryName: "python3.9-customapp-acr"
+  repositoryName39: "python3.9-customapp-acr"
+  repositoryName313: "python3.13-customapp-acr"
   dockerRegistryServiceConnection: "mywin001vmAzureAcr" # Replace with your service connection name
   azureSubscription: "azure pay as you go demo (sep 21)" # Replace with your Azure service connection name
   MajorVersion: "1"
@@ -65,7 +66,7 @@ stages:
               scriptType: ps
               scriptLocation: "inlineScript"
               workingDirectory: $(workingDirectory)
-              inlineScript: az acr build --registry $(containerRegistry) --platform windows --image $(repositoryName):$(imagetag) --image $(repositoryName):$(latestTag) --build-arg BASE_REGISTRY=$(containerRegistry) --file Dockerfile39 .
+              inlineScript: az acr build --registry $(containerRegistry) --platform windows --image $(repositoryName39):$(imagetag) --image $(repositoryName39):$(latestTag) --build-arg BASE_REGISTRY=$(containerRegistry) --file Dockerfile39 .
 
           - task: AzureCLI@2
             displayName: "ACR Build Image 313"
@@ -74,4 +75,4 @@ stages:
               scriptType: ps
               scriptLocation: "inlineScript"
               workingDirectory: $(workingDirectory)
-              inlineScript: az acr build --registry $(containerRegistry) --platform windows --image $(repositoryName):$(imagetag) --image $(repositoryName):$(latestTag) --build-arg BASE_REGISTRY=$(containerRegistry) --file Dockerfile313 .
+              inlineScript: az acr build --registry $(containerRegistry) --platform windows --image $(repositoryName313):$(imagetag) --image $(repositoryName313):$(latestTag) --build-arg BASE_REGISTRY=$(containerRegistry) --file Dockerfile313 .
