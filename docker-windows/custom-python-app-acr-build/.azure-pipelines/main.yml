@@ -69,6 +69,19 @@ stages:
               inlineScript: az acr build --registry $(containerRegistry) --platform windows --image $(repositoryName39):$(imagetag) --image $(repositoryName39):$(latestTag) --build-arg BASE_REGISTRY=$(containerRegistry) --file Dockerfile39 .
 
           - task: AzureCLI@2
+            displayName: "Run built image 39"
+            inputs:
+              azureSubscription: $(azureSubscription)
+              scriptType: ps
+              scriptLocation: "inlineScript"
+              workingDirectory: $(workingDirectory)
+              inlineScript: |
+                echo "Logging into ACR"
+                az acr login --name $(containerRegistry)
+                echo "Running image $(repositoryName39):$(imagetag)"
+                docker run --rm $(containerRegistry)/$(repositoryName39):$(imagetag) python -c "print('container started')"
+
+          - task: AzureCLI@2
             displayName: "ACR Build Image 313"
             inputs:
               azureSubscription: $(azureSubscription)
