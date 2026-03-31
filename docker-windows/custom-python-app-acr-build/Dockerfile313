@@ -3,7 +3,8 @@
 #
 ARG BASE_REGISTRY
 #FROM ${BASE_REGISTRY}/python3.13-baseimage:latest
-FROM ${BASE_REGISTRY}/python3.13-baseimage:beta-latest #Change this
+FROM ${BASE_REGISTRY}/python3.13-baseimage:beta-latest
+#Change this
 
 
 
