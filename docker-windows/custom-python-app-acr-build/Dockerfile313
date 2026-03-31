@@ -27,6 +27,6 @@ ENV PYTHONPATH=/app/src;/app;/app/tests
 RUN python -m pytest tests/ -v --tb=short
 
 # Set the working directory to src for execution
-WORKDIR /app/src
+WORKDIR /app
 # Command to run the application
 CMD ["python", "demo.py"]

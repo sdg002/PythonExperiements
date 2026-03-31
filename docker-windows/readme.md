@@ -4,7 +4,7 @@
 Experiment building docker images with Python using base Windows operating system.
 
 # How does it work ?
-- Take a base windows image (e.g. `mcr.microsoft.com/windows/servercore:ltsc2019`)
+- Take a base windows image (e.g. `mcr.microsoft.com/windows/servercore:ltsc2022`)  .We tried with `ltsc2019` but `windows-2019` is not longer supported by Azure Devops
 - Download the required vesion of Python
 - Install Python
 
