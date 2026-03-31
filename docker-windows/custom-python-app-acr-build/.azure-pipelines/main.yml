@@ -20,7 +20,7 @@ pr:
       - "docker-windows/docs/readme.md"
 
 pool:
-  vmImage: "windows-2019"
+  vmImage: "windows-2022"
 
 variables:
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows/custom-python-app-acr-build"
@@ -59,10 +59,19 @@ stages:
               workingDirectory: "$(workingDirectory)"
 
           - task: AzureCLI@2
-            displayName: "ACR Build Image"
+            displayName: "ACR Build Image 39"
             inputs:
               azureSubscription: $(azureSubscription)
               scriptType: ps
               scriptLocation: "inlineScript"
               workingDirectory: $(workingDirectory)
               inlineScript: az acr build --registry $(containerRegistry) --platform windows --image $(repositoryName):$(imagetag) --image $(repositoryName):$(latestTag) --build-arg BASE_REGISTRY=$(containerRegistry) --file Dockerfile39 .
+
+          - task: AzureCLI@2
+            displayName: "ACR Build Image 313"
+            inputs:
+              azureSubscription: $(azureSubscription)
+              scriptType: ps
+              scriptLocation: "inlineScript"
+              workingDirectory: $(workingDirectory)
+              inlineScript: az acr build --registry $(containerRegistry) --platform windows --image $(repositoryName):$(imagetag) --image $(repositoryName):$(latestTag) --build-arg BASE_REGISTRY=$(containerRegistry) --file Dockerfile313 .
