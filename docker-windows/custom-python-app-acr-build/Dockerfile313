@@ -2,9 +2,7 @@
 #In this Docker file are pulling an image from ACR with Python already installed
 #
 ARG BASE_REGISTRY
-#FROM ${BASE_REGISTRY}/python3.13-baseimage:latest
-FROM ${BASE_REGISTRY}/python3.13-baseimage:beta-latest
-#Change this
+FROM ${BASE_REGISTRY}/python3.13-baseimage:latest
 
 
 
