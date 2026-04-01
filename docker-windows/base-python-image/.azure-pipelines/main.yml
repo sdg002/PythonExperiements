@@ -20,16 +20,17 @@ pr:
       - "docker-windows/docs/readme.md"
 
 pool:
-  vmImage: "windows-2019"
-
+  vmImage: "windows-2022"
 
 variables:
   workingDirectory: "$(System.DefaultWorkingDirectory)/docker-windows/base-python-image"
-  imagetag: "$(BuildName)"
-  containerRegistry: "mywin001vm.azurecr.io"  # Replace with your registry URL
-  repositoryName: "python3.9-baseimage"
-  dockerRegistryServiceConnection: "mywin001vmAzureAcr"  # Replace with your service connection name
-  MajorVersion: '1'
+  imagetag39: "$(BuildName)"
+  imagetag313: "$(BuildName)"
+  containerRegistry: "mywin001vm.azurecr.io" # Replace with your registry URL
+  repositoryName39: "python3.9-baseimage"
+  repositoryName313: "python3.13-baseimage"
+  dockerRegistryServiceConnection: "mywin001vmAzureAcr" # Replace with your service connection name
+  MajorVersion: "1"
   MinorVersion: $[counter(variables['MajorVersion'], 1)]
   ReleaseBuildName: $(MajorVersion).$(MinorVersion).0
   PreReleaseBuildName: $(MajorVersion).$(MinorVersion).$(Build.BuildId)-beta
@@ -59,17 +60,28 @@ stages:
               workingDirectory: "$(workingDirectory)"
 
           - task: Docker@2
-            displayName: "Build and push Docker image"
+            displayName: "Build and push 39"
             inputs:
               command: "buildAndPush"
-              dockerfile: "$(workingDirectory)/Dockerfile"
+              dockerfile: "$(workingDirectory)/Dockerfile39"
               buildContext: "$(workingDirectory)"
-              repository: "$(repositoryName)"
-              tags: | 
-                $(imagetag)
+              repository: "$(repositoryName39)"
+              tags: |
+                $(imagetag39)
                 $(latestTag)
               containerRegistry: "$(dockerRegistryServiceConnection)"
-              #repository: "$(containerRegistry)/$(repositoryName)"
+
+          - task: Docker@2
+            displayName: "Build and push 313"
+            inputs:
+              command: "buildAndPush"
+              dockerfile: "$(workingDirectory)/Dockerfile313"
+              buildContext: "$(workingDirectory)"
+              repository: "$(repositoryName313)"
+              tags: |
+                $(imagetag313)
+                $(latestTag)
+              containerRegistry: "$(dockerRegistryServiceConnection)"
 
           - task: Docker@2
             displayName: "List all Docker images"
@@ -77,5 +89,9 @@ stages:
               command: "images"
 
           - script: |
-              docker run --rm $(containerRegistry)/$(repositoryName):$(imagetag)  python --version
-            displayName: "Check Python version in Docker"
+              docker run --rm $(containerRegistry)/$(repositoryName39):$(imagetag39)  python --version
+            displayName: "39-Check Python version in Docker"
+
+          - script: |
+              docker run --rm $(containerRegistry)/$(repositoryName313):$(imagetag313)  python --version
+            displayName: "313-Check Python version in Docker"
