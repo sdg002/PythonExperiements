@@ -38,3 +38,4 @@ pillow
 kiwisolver==1.5.0 #Bizarre error
 statsmodels
 scipy
+FileLock
