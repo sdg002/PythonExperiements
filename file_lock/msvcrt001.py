@@ -1,5 +1,5 @@
-import msvcrt
-"""Demonstrate locking a file region on Windows using msvcrt.locking.
+"""
+Demonstrate locking a file region on Windows using msvcrt.locking.
 
 Run this script in two terminals at the same time. The first process acquires
 the lock and holds it for a few seconds. The second process retries until the
